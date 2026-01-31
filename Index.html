@@ -20,7 +20,9 @@
       --shadow: 0 18px 70px rgba(0,0,0,.55);
       --radius: 18px;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -32,9 +34,11 @@
         linear-gradient(180deg, var(--bg0), var(--bg1));
       min-height:100vh;
       overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* subtle stars */
+    /* stars */
     .stars:before, .stars:after{
       content:"";
       position:fixed; inset:0;
@@ -52,9 +56,18 @@
     }
     .stars:after{opacity:.20; filter: blur(0.4px)}
 
-    .wrap{max-width:1100px;margin:0 auto;padding:22px}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding: clamp(14px, 3.6vw, 22px);
+    }
+
+    /* ✅ RESPONSIVE TOP */
     .top{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
       padding:14px 16px;
       border:1px solid var(--stroke);
       border-radius: var(--radius);
@@ -62,17 +75,59 @@
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
     }
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.2px}
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:.2px;
+      min-width:0;
+    }
+
     .chip{
-      font-size:12px;font-weight:900;
-      padding:8px 12px;border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      padding:8px 12px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,.16);
       background:linear-gradient(90deg, rgba(0,229,255,.22), rgba(124,255,107,.16));
       white-space:nowrap;
     }
 
-    .hero{margin-top:18px;display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-    @media (max-width:960px){.hero{grid-template-columns:1fr}}
+    @media (max-width: 520px){
+      .top{
+        flex-direction:column;
+        align-items:stretch;
+        text-align:center;
+        gap:10px;
+      }
+      .brand{
+        flex-direction:column;
+        gap:8px;
+      }
+      .brand span:last-child{
+        font-size:14px;
+        line-height:1.2;
+        opacity:.95;
+      }
+      .top .chip{
+        width:fit-content;
+        margin:0 auto;
+      }
+    }
+
+    .hero{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+      align-items:start;
+    }
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr}
+    }
+
     .card{
       border:1px solid var(--stroke);
       border-radius: var(--radius);
@@ -82,7 +137,13 @@
       position:relative;
     }
     .pad{padding:18px}
-    h1{margin:0 0 10px;font-size:34px;line-height:1.05}
+
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 5.4vw, 40px);
+      line-height:1.05;
+      letter-spacing:-0.2px;
+    }
     h2{margin:0 0 10px;font-size:18px}
     p{margin:0 0 10px;color:var(--muted);line-height:1.55}
     .k{color:var(--gold);font-weight:900}
@@ -100,33 +161,51 @@
 
     .steps{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns:1fr;
       gap:10px;
       margin-top:12px;
     }
+
     .step{
       border:1px solid rgba(255,255,255,.12);
       background:rgba(0,0,0,.18);
       border-radius:16px;
       padding:14px;
     }
+
     .step .head{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap; /* ✅ quebra bonito */
     }
+
     .badge{
-      font-size:12px; font-weight:900;
-      padding:6px 10px; border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      padding:6px 10px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
       background:rgba(255,255,255,.06);
       color:rgba(234,240,255,.92);
       white-space:nowrap;
+      margin-left:auto;
     }
-    .step h3{margin:0 0 6px; font-size:14px}
-    .step ul{margin:8px 0 0; padding-left:18px; color:var(--muted); line-height:1.55}
+
+    .step h3{margin:0 0 6px;font-size:14px}
+    .step ul{margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.55}
+
     .divider{height:1px;background:rgba(255,255,255,.10);margin:14px 0}
 
-    .input{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .input{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:12px
+    }
     label{font-size:13px;color:rgba(234,240,255,.85);font-weight:800}
+
     input{
       width:100%;
       padding:14px 14px;
@@ -141,7 +220,13 @@
       border-color: rgba(0,229,255,.45);
       box-shadow: 0 0 0 4px rgba(0,229,255,.12);
     }
-    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px
+    }
 
     .btn{
       border:1px solid rgba(255,255,255,.18);
@@ -156,9 +241,12 @@
       text-decoration:none;
       display:inline-flex;
       align-items:center;
+      justify-content:center;
       gap:10px;
+      min-height:44px;
     }
     .btn:hover{transform:translateY(-1px);opacity:.95}
+    .btn:disabled{opacity:.55; cursor:not-allowed; transform:none}
     .btn.primary{
       background:linear-gradient(90deg, rgba(0,229,255,.95), rgba(124,255,107,.90));
       color:#061018;
@@ -170,9 +258,12 @@
       color:#061018;
       border-color: rgba(255,255,255,.0);
     }
-    .btn.danger{
-      background:rgba(255,92,92,.12);
-      border-color: rgba(255,92,92,.25);
+
+    /* ✅ MOBILE: botões em coluna */
+    @media (max-width: 520px){
+      .row{flex-direction:column}
+      .btn{width:100%}
+      .pad{padding:16px}
     }
 
     .ok, .err{
@@ -207,6 +298,7 @@
       white-space:pre-wrap;
       overflow:auto;
       max-height:320px;
+      word-break:break-word;
     }
 
     .foot{
@@ -216,7 +308,7 @@
       color:rgba(234,240,255,.70);
     }
 
-    /* celebration modal */
+    /* modal */
     .modal{
       position:fixed; inset:0;
       display:none;
@@ -248,6 +340,8 @@
     .modal .content{position:relative}
     .modal h3{margin:0 0 8px; font-size:16px}
     .modal p{margin:0 0 12px; color:rgba(234,240,255,.78)}
+
+    /* toast */
     .toast{
       position:fixed;
       left:50%; bottom:16px;
@@ -271,6 +365,10 @@
       z-index:998;
       display:none;
     }
+
+    /* small accessibility */
+    a{color:inherit}
+    .sr{position:absolute;left:-9999px}
   </style>
 </head>
 
@@ -307,10 +405,8 @@
                 <span class="badge">PASSO 1</span>
               </div>
               <div class="row">
-                <a class="btn primary" id="btnAfiliar" href="#" target="_blank" rel="noopener">
-                  ✅ Entrar como afiliado
-                </a>
-                <button class="btn" id="btnMarcar1">Já fiz isso</button>
+                <a class="btn primary" id="btnAfiliar" href="#" target="_blank" rel="noopener">✅ Entrar como afiliado</a>
+                <button class="btn" id="btnMarcar1" type="button">Já fiz isso</button>
               </div>
               <p class="mini">Depois de entrar como afiliado, vá para o PASSO 2.</p>
             </div>
@@ -326,7 +422,7 @@
               <ul>
                 <li>Abra o produto e clique em <b>Detalhes</b></li>
                 <li>Copie a <b>URL da página de vendas</b> (é o seu link de afiliado)</li>
-                <li>Volte aqui e cole no campo do PASSO 3</li>
+                <li>Volte aqui e cole no campo do <b>PASSO 3</b></li>
               </ul>
             </div>
 
@@ -341,13 +437,13 @@
 
               <div class="input">
                 <label for="aff">Cole aqui sua URL da página de vendas (afiliado)</label>
-                <input id="aff" placeholder="EX: https://consysencia-site.netlify.app/nivel1/  (ou seu link da Kiwify)" autocomplete="off" />
+                <input id="aff" placeholder="COLE AQUI A URL DA PÁGINA DE VENDAS (Kiwify)" autocomplete="off" inputmode="url" />
                 <div class="mini">Dica: precisa começar com <b>http</b> ou <b>https</b>.</div>
               </div>
 
               <div class="row">
-                <button class="btn gold" id="btnGerar">✨ GERAR 3 TEXTOS + AUTO REPLY</button>
-                <button class="btn" id="btnCopiarTudo" disabled>📋 COPIAR TUDO</button>
+                <button class="btn gold" id="btnGerar" type="button">✨ GERAR 3 TEXTOS + AUTO REPLY</button>
+                <button class="btn" id="btnCopiarTudo" type="button" disabled>📋 COPIAR TUDO</button>
               </div>
 
               <div class="ok" id="okBox"></div>
@@ -380,7 +476,7 @@
               <h3>Mensagem para Auto Reply (copiar/colar)</h3>
               <div class="code" id="replyBox">Aguardando seu link…</div>
               <div class="row">
-                <button class="btn" id="cpyReply" disabled>Copiar mensagem</button>
+                <button class="btn" id="cpyReply" type="button" disabled>Copiar mensagem</button>
               </div>
             </div>
 
@@ -388,7 +484,7 @@
               <h3>3 textos para postar (com seu link)</h3>
               <div class="code" id="postsBox">Aguardando seu link…</div>
               <div class="row">
-                <button class="btn" id="cpyPosts" disabled>Copiar 3 textos</button>
+                <button class="btn" id="cpyPosts" type="button" disabled>Copiar 3 textos</button>
               </div>
             </div>
           </div>
@@ -403,15 +499,13 @@
               <h3>Link oficial do app</h3>
               <p class="mini" style="margin:0 0 10px">
                 Baixe no Google Play:
-                <b id="arLinkText">https://play.google.com/store/apps/details?id=com.pransuinc.autoreply</b>
+                <b id="arLinkText"></b>
               </p>
               <div class="row">
                 <a class="btn primary" id="btnAutoReply" href="#" target="_blank" rel="noopener">📥 Baixar Auto Reply</a>
-                <button class="btn" id="cpyArLink">Copiar link</button>
+                <button class="btn" id="cpyArLink" type="button">Copiar link</button>
               </div>
-              <p class="mini" style="margin-top:10px">
-                ✅ Use sempre o app oficial (como na sua imagem).
-              </p>
+              <p class="mini" style="margin-top:10px">✅ Use sempre o app oficial (como na sua imagem).</p>
             </div>
 
             <div class="box">
@@ -422,12 +516,12 @@
                 <li>Em <b>Responder por WA App</b>: escolha <b>Oficial de WA</b></li>
                 <li>Em <b>Padrão de mensagem recebida</b>:
                   <ul>
-                    <li>Opção mais simples: coloque <b>*</b> e selecione <b>Todas</b></li>
-                    <li>Opção mais segura: selecione <b>Conter</b> e coloque “oi” ou “info”</li>
+                    <li>Mais simples: coloque <b>*</b> e selecione <b>Todas</b></li>
+                    <li>Mais seguro: selecione <b>Conter</b> e coloque: <b>oi</b>, <b>info</b> ou <b>link</b></li>
                   </ul>
                 </li>
                 <li>Em <b>Responder a</b>: escolha <b>Grupos</b> ou <b>Ambas</b></li>
-                <li>Defina a resposta usando a mensagem pronta (aqui do lado)</li>
+                <li>Defina a resposta usando a mensagem pronta (gerada aqui)</li>
                 <li>Salve (✅) e ative o Auto Reply</li>
               </ul>
             </div>
@@ -440,7 +534,7 @@
                 <li><b>20:00</b> — noite</li>
               </ul>
               <p class="mini" style="margin-top:8px">
-                Você pode usar os <b>3 textos</b> gerados para postar/rodar no padrão que preferir.
+                Use os <b>3 textos</b> gerados para postar/rodar no padrão que preferir.
               </p>
             </div>
 
@@ -463,8 +557,8 @@
           Agora é só <b>copiar/colar</b> e colocar a máquina pra rodar.
         </p>
         <div class="row">
-          <button class="btn primary" id="goAutoReply">Ir para Auto Reply</button>
-          <button class="btn" id="closeModal">Fechar</button>
+          <button class="btn primary" id="goAutoReply" type="button">Ir para Auto Reply</button>
+          <button class="btn" id="closeModal" type="button">Fechar</button>
         </div>
       </div>
     </div>
@@ -480,8 +574,10 @@
   // ========= ELEMENTOS =========
   const btnAfiliar = document.getElementById("btnAfiliar");
   const btnAutoReply = document.getElementById("btnAutoReply");
-  const aff = document.getElementById("aff");
+  const arLinkText = document.getElementById("arLinkText");
+  const cpyArLink = document.getElementById("cpyArLink");
 
+  const aff = document.getElementById("aff");
   const btnGerar = document.getElementById("btnGerar");
   const btnCopiarTudo = document.getElementById("btnCopiarTudo");
   const cpyReply = document.getElementById("cpyReply");
@@ -497,9 +593,6 @@
   const modal = document.getElementById("modal");
   const closeModal = document.getElementById("closeModal");
   const goAutoReply = document.getElementById("goAutoReply");
-
-  const arLinkText = document.getElementById("arLinkText");
-  const cpyArLink = document.getElementById("cpyArLink");
   const btnMarcar1 = document.getElementById("btnMarcar1");
 
   btnAfiliar.href = KIWI_AFFILIATE_JOIN;
@@ -605,11 +698,10 @@
       p.x += p.vx;
       p.y += p.vy;
       p.rot += p.vr;
-      p.vy += 0.03; // gravity
+      p.vy += 0.03;
       if(p.y > canvas.height + 40) p.a = 0;
     }
 
-    // stop when mostly invisible
     const alive = confettiPieces.some(p => p.a > 0.05);
     if(alive) requestAnimationFrame(drawConfetti);
     else {
@@ -656,11 +748,9 @@
     cpyPosts.disabled = false;
 
     showOk("✅ Textos gerados com seu link. Agora copie e configure o Auto Reply (logo abaixo).");
-
     toast("🎉 Gerado! Seus textos estão prontos.");
     celebrate();
 
-    // open celebration modal
     modal.style.display = "flex";
   });
 
@@ -695,7 +785,6 @@
     toast("👇 Aqui está o passo a passo do Auto Reply.");
   });
 
-  // Close modal clicking outside
   modal.addEventListener("click", (e)=>{
     if(e.target === modal) modal.style.display = "none";
   });
