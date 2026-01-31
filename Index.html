@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>ConSySencI.A — Gerador Nível 1</title>
+  <meta name="description" content="Cole seu link de afiliado e gere sua landing HTML pronta + tutorial completo."/>
+  <style>
+    :root{
+      --bg0:#050714;
+      --bg1:#070B22;
+      --card:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.12);
+      --txt:#EAF0FF;
+      --muted:#B7C5FF;
+      --cyan:#00E5FF;
+      --lime:#7CFF6B;
+      --gold:#FFCC00;
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--txt);
+      background:
+        radial-gradient(1400px 700px at 12% 10%, rgba(0,229,255,.20), transparent 60%),
+        radial-gradient(900px 650px at 86% 22%, rgba(124,255,107,.18), transparent 62%),
+        radial-gradient(900px 650px at 50% 92%, rgba(255,204,0,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    .stars:before, .stars:after{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(2px 2px at 12% 18%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(1px 1px at 40% 68%, rgba(255,255,255,.40), transparent 60%),
+        radial-gradient(1px 1px at 80% 30%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(2px 2px at 88% 62%, rgba(255,255,255,.40), transparent 60%),
+        radial-gradient(1px 1px at 18% 82%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(1px 1px at 55% 22%, rgba(255,255,255,.35), transparent 60%);
+      opacity:.35;
+      transform: translateZ(0);
+    }
+    .stars:after{opacity:.20; filter: blur(0.4px)}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background:rgba(255,255,255,.05);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.2px}
+    .chip{
+      font-size:12px;font-weight:900;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:linear-gradient(90deg, rgba(0,229,255,.22), rgba(124,255,107,.16));
+    }
+    .hero{margin-top:18px;display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+    @media (max-width:960px){.hero{grid-template-columns:1fr}}
+    .card{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background:var(--card);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .pad{padding:18px}
+    h1{margin:0 0 10px;font-size:34px;line-height:1.05}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.55}
+    .k{
+      color:var(--gold);
+      font-weight:900;
+    }
+    .input{
+      display:flex;flex-direction:column;gap:10px;margin-top:14px
+    }
+    label{font-size:13px;color:rgba(234,240,255,.85);font-weight:800}
+    input{
+      width:100%;
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.20);
+      color:var(--txt);
+      outline:none;
+      font-size:14px;
+    }
+    input:focus{
+      border-color: rgba(0,229,255,.45);
+      box-shadow: 0 0 0 4px rgba(0,229,255,.12);
+    }
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:var(--txt);
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:900;
+      cursor:pointer;
+      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px);opacity:.95}
+    .btn.primary{
+      background:linear-gradient(90deg, rgba(0,229,255,.95), rgba(124,255,107,.90));
+      color:#061018;
+      border-color: rgba(255,255,255,.0);
+      box-shadow: 0 14px 30px rgba(0,229,255,.14);
+    }
+    .btn.gold{
+      background:linear-gradient(90deg, rgba(255,204,0,.92), rgba(0,229,255,.55));
+      color:#061018;
+      border-color: rgba(255,255,255,.0);
+    }
+    .mini{
+      font-size:12px;color:rgba(234,240,255,.72)
+    }
+    .ok, .err{
+      margin-top:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.20);
+      display:none;
+      font-size:13px;
+      line-height:1.45;
+    }
+    .ok{border-color: rgba(124,255,107,.28)}
+    .err{border-color: rgba(255,92,92,.28)}
+    .grid2{display:grid;grid-template-columns:1fr;gap:12px}
+    .box{
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .box h3{margin:0 0 8px;font-size:14px}
+    .box ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.55}
+    .code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:12px;
+      background:rgba(0,0,0,.26);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      padding:12px;
+      white-space:pre;
+      overflow:auto;
+      max-height:280px;
+    }
+    .divider{height:1px;background:rgba(255,255,255,.10);margin:14px 0}
+    .foot{
+      margin-top:14px;
+      text-align:center;
+      font-size:12px;
+      color:rgba(234,240,255,.70);
+    }
+    .glow{
+      position:absolute;inset:-120px;
+      background:radial-gradient(circle at 30% 20%, rgba(0,229,255,.18), transparent 40%),
+                 radial-gradient(circle at 70% 25%, rgba(124,255,107,.15), transparent 45%),
+                 radial-gradient(circle at 50% 80%, rgba(255,204,0,.10), transparent 45%);
+      filter: blur(20px);
+      opacity:.65;
+      pointer-events:none;
+    }
+  </style>
+</head>
+
+<body class="stars">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <span class="chip">NÍVEL 1</span>
+        <span>ConSySencI.A — Gerador de Landing</span>
+      </div>
+      <div class="chip">Cole seu link → Baixe o HTML</div>
+    </div>
+
+    <div class="hero">
+      <!-- LEFT -->
+      <div class="card">
+        <div class="glow"></div>
+        <div class="pad">
+          <h1>Seu site pronto em 60 segundos.</h1>
+          <p>
+            Cole seu link de afiliado e gere automaticamente o arquivo <span class="k">index.html</span>
+            já com seu botão de compra funcionando.
+          </p>
+
+          <div class="input">
+            <label for="aff">Seu link de afiliado (cole aqui)</label>
+            <input id="aff" placeholder="COLE SEU LINK DE AFILIADO AQUI" autocomplete="off" />
+            <div class="mini">Dica: precisa começar com <b>http</b> ou <b>https</b>.</div>
+          </div>
+
+          <div class="row">
+            <button class="btn primary" id="btnGerar">GERAR LANDING</button>
+            <button class="btn" id="btnCopiar" disabled>COPIAR CÓDIGO</button>
+            <button class="btn gold" id="btnBaixar" disabled>BAIXAR index.html</button>
+          </div>
+
+          <div class="ok" id="okBox"></div>
+          <div class="err" id="errBox"></div>
+
+          <div class="divider"></div>
+
+          <div class="box">
+            <h3>✅ O que você vai ter ao final</h3>
+            <ul>
+              <li>Um site (landing) com seu link aplicado</li>
+              <li>Um link do seu site no ar (Netlify)</li>
+              <li>Um atendimento automático no WhatsApp</li>
+              <li>Um roteiro simples pra começar hoje</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="grid2">
+        <div class="card">
+          <div class="pad">
+            <h2 style="margin:0 0 10px;font-size:18px">Prévia do código gerado</h2>
+            <div class="code" id="codeBox">Cole seu link e clique em “GERAR LANDING”.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="pad">
+            <h2 style="margin:0 0 10px;font-size:18px">Tutorial simples (celular)</h2>
+
+            <div class="box">
+              <h3>1) GitHub (guardar seu arquivo)</h3>
+              <ul>
+                <li>Crie um repositório (ex.: <b>meu-nivel1</b>)</li>
+                <li>Envie o arquivo <b>index.html</b> (o que você baixou)</li>
+              </ul>
+            </div>
+
+            <div class="box">
+              <h3>2) Netlify (colocar no ar)</h3>
+              <ul>
+                <li>Entre em <b>netlify.com</b></li>
+                <li><b>Add new site → Import from Git</b></li>
+                <li>Conecte o GitHub e escolha seu repositório</li>
+                <li>Deploy → pronto ✅</li>
+              </ul>
+              <p class="mini" style="margin-top:8px">
+                Depois do deploy, copie o link do seu site tipo:
+                <b>https://seusite.netlify.app</b>
+              </p>
+            </div>
+
+            <div class="box">
+              <h3>3) Auto Reply (atendimento automático)</h3>
+              <p class="mini" style="margin:0 0 10px">
+                Baixe o app oficial aqui:
+                <b>https://play.google.com/store/apps/details?id=com.pransuinc.autoreply</b>
+              </p>
+              <ul>
+                <li>Configure para responder automaticamente no <b>privado</b></li>
+                <li>Use a mensagem pronta (abaixo) com seu link do site</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- EXTRA: Auto reply + textos + horários + desejo -->
+    <div class="card" style="margin-top:14px">
+      <div class="pad">
+        <h2 style="margin:0 0 10px;font-size:20px">📲 Mensagens prontas + horários (começar hoje)</h2>
+        <p class="mini">
+          Regra de ouro: poste 1x por dia em grupos onde divulgação é permitida (manual, 30 segundos) e deixe o Auto Reply
+          responder automaticamente quem chamar no privado. Isso mantém sua conta segura e sua conversão alta.
+        </p>
+
+        <div class="box">
+          <h3>Mensagem de Auto Reply (privado) — copiar/colar</h3>
+          <div class="code" id="replyTemplate">Oi 👋
+Tenho um kit simples pra começar hoje: landing pronta + tutorial (tudo copiar/colar).
+Aqui está o link: SEU_LINK_DO_SITE_AQUI
+Se quiser, eu te explico em 30 segundos.</div>
+          <p class="mini" style="margin-top:8px">
+            Troque <b>SEU_LINK_DO_SITE_AQUI</b> pelo link do seu site no Netlify.
+          </p>
+        </div>
+
+        <div class="box">
+          <h3>3 textos para postar em grupos (1x ao dia)</h3>
+          <div class="code">Texto 1:
+🧩 Kit copiar/colar pra começar hoje (R$10)
+Landing pronta + tutorial + atendimento automático
+Link: SEU_LINK_DO_SITE_AQUI
+
+Texto 2:
+Quem quer começar no online sem aparecer?
+É só copiar/colar e divulgar com constância.
+Link: SEU_LINK_DO_SITE_AQUI
+
+Texto 3:
+Não é curso gigante. É execução simples.
+Página pronta + passo a passo (R$10).
+Link: SEU_LINK_DO_SITE_AQUI</div>
+        </div>
+
+        <div class="box">
+          <h3>Horários recomendados</h3>
+          <ul>
+            <li><b>09:00</b> (manhã)</li>
+            <li><b>14:00</b> (tarde)</li>
+            <li><b>20:00</b> (noite)</li>
+          </ul>
+          <p class="mini" style="margin-top:8px">
+            Você escolhe um horário por dia para postagem manual em grupos. O Auto Reply cuida do atendimento depois.
+          </p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="box">
+          <h3>🔥 Próximo desbloqueio (Nível 2)</h3>
+          <p style="margin:0;color:var(--muted)">
+            Se você executar isso por 2–3 dias, vai acontecer uma coisa inevitável: <b>vão chegar perguntas repetidas</b> e você vai
+            sentir que está perdendo tempo respondendo ou travando na divulgação.
+            <br><br>
+            No <span class="k">Nível 2</span> você desbloqueia:
+          </p>
+          <ul style="margin-top:10px">
+            <li>Imagens prontas pra divulgar (sem travar)</li>
+            <li>Scripts de vendas (pra converter sem improviso)</li>
+            <li>Títulos/descrições para redes sociais</li>
+            <li>Uma landing mais forte (mais clique, mais compra)</li>
+            <li>Respostas rápidas organizadas (venda fluindo)</li>
+          </ul>
+          <p class="mini" style="margin-top:10px">
+            Nível 1 = ligar a máquina. <b>Nível 2 = fazer ela produzir com consistência.</b>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="foot">© ConSySencI.A — Gerador Nível 1</div>
+  </div>
+
+<script>
+  // ========== TEMPLATES ==========
+  function landingTemplate(affiliateLink) {
+    // Landing final que o aluno vai baixar como index.html
+    // Mantida simples, linda e mobile-first
+    return `<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nível 1 — Ativação Automática</title>
+  <meta name="description" content="Kit copiar/colar pra começar hoje: landing pronta + tutorial." />
+  <style>
+    :root{
+      --bg:#050714; --bg2:#070B22; --card:rgba(255,255,255,.06); --stroke:rgba(255,255,255,.12);
+      --txt:#EAF0FF; --muted:#B7C5FF; --cyan:#00E5FF; --lime:#7CFF6B; --gold:#FFCC00;
+      --shadow: 0 18px 70px rgba(0,0,0,.55); --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--txt);
+      background:
+        radial-gradient(1200px 700px at 12% 10%, rgba(0,229,255,.22), transparent 60%),
+        radial-gradient(900px 650px at 86% 22%, rgba(124,255,107,.18), transparent 62%),
+        radial-gradient(900px 650px at 50% 92%, rgba(255,204,0,.10), transparent 60%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
+      min-height:100vh;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:22px}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;border:1px solid var(--stroke);border-radius:var(--radius);
+      background:rgba(255,255,255,.05);backdrop-filter: blur(10px); box-shadow:var(--shadow);
+    }
+    .brand{display:flex;gap:10px;align-items:center;font-weight:900}
+    .chip{
+      font-size:12px;font-weight:900;padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:linear-gradient(90deg, rgba(0,229,255,.22), rgba(124,255,107,.16));
+    }
+    .hero{margin-top:16px;display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+    @media(max-width:860px){.hero{grid-template-columns:1fr}}
+    .card{border:1px solid var(--stroke);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+    .pad{padding:18px}
+    h1{margin:0 0 10px;font-size:34px;line-height:1.05}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.55}
+    .k{color:var(--gold);font-weight:900}
+    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .pill{font-size:12px;font-weight:800;padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(0,229,255,.26); background:rgba(0,229,255,.10)}
+    .price{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(90deg, rgba(124,255,107,.16), rgba(0,229,255,.12))}
+    .price strong{font-size:22px;color:var(--txt)}
+    .btn{
+      display:block; text-decoration:none; text-align:center; margin-top:12px;
+      padding:14px 14px;border-radius:14px;font-weight:900;
+      background:linear-gradient(90deg, rgba(0,229,255,.95), rgba(124,255,107,.90));
+      color:#061018; border:0;
+    }
+    .box{margin-top:12px;padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18)}
+    .box h3{margin:0 0 8px;font-size:14px}
+    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.55}
+    .foot{margin-top:14px;text-align:center;font-size:12px;color:rgba(234,240,255,.70)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="chip">NÍVEL 1</span> <span>ConSySencI.A</span></div>
+      <div class="chip">ATIVAÇÃO AUTOMÁTICA</div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <div class="pad">
+          <h1>Kit copiar/colar pra começar hoje.</h1>
+          <p>Você recebe uma página pronta + um passo a passo simples. É só plugar e rodar.</p>
+
+          <div class="pillrow">
+            <div class="pill">Landing pronta (HTML)</div>
+            <div class="pill">Tutorial pelo celular</div>
+            <div class="pill">Começar hoje</div>
+          </div>
+
+          <div class="price">
+            <div><strong>Só R$10</strong><br><span style="color:var(--muted);font-size:13px">Acesso imediato • Execução simples</span></div>
+            <div class="chip">Entrada rápida</div>
+          </div>
+
+          <a class="btn" href="${affiliateLink}" target="_blank" rel="noopener">ATIVAR AGORA</a>
+
+          <p style="margin-top:10px"><span class="k">Importante:</span> é simples. Quem executa, entende.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="pad">
+          <div class="box">
+            <h3>✅ O que você recebe</h3>
+            <ul>
+              <li>Página pronta</li>
+              <li>Passo a passo simples</li>
+              <li>Roteiro de divulgação</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h3>📌 Pra quem é</h3>
+            <ul>
+              <li>Quem quer começar sem aparecer</li>
+              <li>Quem quer copiar/colar</li>
+              <li>Quem quer algo simples e replicável</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h3>🔥 Próximo nível</h3>
+            <p style="margin:0">
+              No Nível 2 você desbloqueia materiais prontos e estrutura pra converter com consistência.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">© ConSySencI.A — Nível 1</div>
+  </div>
+</body>
+</html>`;
+  }
+
+  // ========== HELPERS ==========
+  const aff = document.getElementById("aff");
+  const btnGerar = document.getElementById("btnGerar");
+  const btnCopiar = document.getElementById("btnCopiar");
+  const btnBaixar = document.getElementById("btnBaixar");
+  const codeBox = document.getElementById("codeBox");
+  const okBox = document.getElementById("okBox");
+  const errBox = document.getElementById("errBox");
+
+  let lastCode = "";
+
+  function showOk(msg){
+    okBox.style.display = "block";
+    errBox.style.display = "none";
+    okBox.innerHTML = msg;
+  }
+  function showErr(msg){
+    errBox.style.display = "block";
+    okBox.style.display = "none";
+    errBox.innerHTML = msg;
+  }
+
+  function isValidUrl(u){
+    try{
+      const url = new URL(u);
+      return url.protocol === "http:" || url.protocol === "https:";
+    }catch(e){ return false; }
+  }
+
+  function downloadFile(filename, content){
+    const blob = new Blob([content], {type:"text/html;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 0);
+  }
+
+  async function copyText(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      return true;
+    }catch(e){
+      // fallback
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      ta.remove();
+      return ok;
+    }
+  }
+
+  // ========== ACTIONS ==========
+  btnGerar.addEventListener("click", ()=>{
+    const link = (aff.value || "").trim();
+
+    if(!link){
+      showErr("Cole seu link de afiliado no campo acima.");
+      return;
+    }
+    if(!isValidUrl(link)){
+      showErr("Esse link parece inválido. Ele precisa começar com <b>http</b> ou <b>https</b>.");
+      return;
+    }
+
+    lastCode = landingTemplate(link);
+    codeBox.textContent = lastCode;
+
+    btnCopiar.disabled = false;
+    btnBaixar.disabled = false;
+
+    showOk("✅ Landing gerada com sucesso. Agora clique em <b>BAIXAR index.html</b> e publique no Netlify.");
+  });
+
+  btnCopiar.addEventListener("click", async ()=>{
+    if(!lastCode) return;
+    const ok = await copyText(lastCode);
+    if(ok) showOk("✅ Código copiado. Se quiser, você pode colar no arquivo <b>index.html</b> direto no GitHub.");
+    else showErr("Não consegui copiar automaticamente. Selecione o código e copie manualmente.");
+  });
+
+  btnBaixar.addEventListener("click", ()=>{
+    if(!lastCode) return;
+    downloadFile("index.html", lastCode);
+    showOk("✅ Arquivo <b>index.html</b> baixado. Agora suba no GitHub e publique no Netlify.");
+  });
+</script>
+</body>
+</html>
