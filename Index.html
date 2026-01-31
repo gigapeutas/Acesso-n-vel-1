@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>ConSySencI.A — Gerador Nível 1</title>
-  <meta name="description" content="Cole seu link de afiliado e gere sua landing HTML pronta + tutorial completo."/>
+  <title>ConSySencI.A — Ativação Nível 1</title>
+  <meta name="description" content="Ative seu sistema: entre como afiliado, cole seu link da página de vendas e gere 3 textos + configuração do Auto Reply."/>
   <style>
     :root{
       --bg0:#050714;
@@ -16,6 +16,7 @@
       --cyan:#00E5FF;
       --lime:#7CFF6B;
       --gold:#FFCC00;
+      --red:#FF5C5C;
       --shadow: 0 18px 70px rgba(0,0,0,.55);
       --radius: 18px;
     }
@@ -32,6 +33,8 @@
       min-height:100vh;
       overflow-x:hidden;
     }
+
+    /* subtle stars */
     .stars:before, .stars:after{
       content:"";
       position:fixed; inset:0;
@@ -48,6 +51,7 @@
       transform: translateZ(0);
     }
     .stars:after{opacity:.20; filter: blur(0.4px)}
+
     .wrap{max-width:1100px;margin:0 auto;padding:22px}
     .top{
       display:flex;align-items:center;justify-content:space-between;gap:12px;
@@ -64,8 +68,10 @@
       padding:8px 12px;border-radius:999px;
       border:1px solid rgba(255,255,255,.16);
       background:linear-gradient(90deg, rgba(0,229,255,.22), rgba(124,255,107,.16));
+      white-space:nowrap;
     }
-    .hero{margin-top:18px;display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+
+    .hero{margin-top:18px;display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
     @media (max-width:960px){.hero{grid-template-columns:1fr}}
     .card{
       border:1px solid var(--stroke);
@@ -77,14 +83,49 @@
     }
     .pad{padding:18px}
     h1{margin:0 0 10px;font-size:34px;line-height:1.05}
+    h2{margin:0 0 10px;font-size:18px}
     p{margin:0 0 10px;color:var(--muted);line-height:1.55}
-    .k{
-      color:var(--gold);
-      font-weight:900;
+    .k{color:var(--gold);font-weight:900}
+    .mini{font-size:12px;color:rgba(234,240,255,.72)}
+
+    .glow{
+      position:absolute;inset:-120px;
+      background:radial-gradient(circle at 30% 20%, rgba(0,229,255,.18), transparent 40%),
+                 radial-gradient(circle at 70% 25%, rgba(124,255,107,.15), transparent 45%),
+                 radial-gradient(circle at 50% 80%, rgba(255,204,0,.10), transparent 45%);
+      filter: blur(20px);
+      opacity:.65;
+      pointer-events:none;
     }
-    .input{
-      display:flex;flex-direction:column;gap:10px;margin-top:14px
+
+    .steps{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-top:12px;
     }
+    .step{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      border-radius:16px;
+      padding:14px;
+    }
+    .step .head{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .badge{
+      font-size:12px; font-weight:900;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:rgba(234,240,255,.92);
+      white-space:nowrap;
+    }
+    .step h3{margin:0 0 6px; font-size:14px}
+    .step ul{margin:8px 0 0; padding-left:18px; color:var(--muted); line-height:1.55}
+    .divider{height:1px;background:rgba(255,255,255,.10);margin:14px 0}
+
+    .input{display:flex;flex-direction:column;gap:10px;margin-top:12px}
     label{font-size:13px;color:rgba(234,240,255,.85);font-weight:800}
     input{
       width:100%;
@@ -101,6 +142,7 @@
       box-shadow: 0 0 0 4px rgba(0,229,255,.12);
     }
     .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
     .btn{
       border:1px solid rgba(255,255,255,.18);
       background:rgba(255,255,255,.06);
@@ -111,6 +153,10 @@
       cursor:pointer;
       transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
       user-select:none;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
     }
     .btn:hover{transform:translateY(-1px);opacity:.95}
     .btn.primary{
@@ -124,9 +170,11 @@
       color:#061018;
       border-color: rgba(255,255,255,.0);
     }
-    .mini{
-      font-size:12px;color:rgba(234,240,255,.72)
+    .btn.danger{
+      background:rgba(255,92,92,.12);
+      border-color: rgba(255,92,92,.25);
     }
+
     .ok, .err{
       margin-top:10px;
       padding:12px 12px;
@@ -139,6 +187,7 @@
     }
     .ok{border-color: rgba(124,255,107,.28)}
     .err{border-color: rgba(255,92,92,.28)}
+
     .grid2{display:grid;grid-template-columns:1fr;gap:12px}
     .box{
       border:1px solid var(--stroke);
@@ -147,7 +196,7 @@
       padding:14px;
     }
     .box h3{margin:0 0 8px;font-size:14px}
-    .box ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.55}
+
     .code{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       font-size:12px;
@@ -155,37 +204,86 @@
       border:1px solid rgba(255,255,255,.12);
       border-radius:14px;
       padding:12px;
-      white-space:pre;
+      white-space:pre-wrap;
       overflow:auto;
-      max-height:280px;
+      max-height:320px;
     }
-    .divider{height:1px;background:rgba(255,255,255,.10);margin:14px 0}
+
     .foot{
       margin-top:14px;
       text-align:center;
       font-size:12px;
       color:rgba(234,240,255,.70);
     }
-    .glow{
-      position:absolute;inset:-120px;
-      background:radial-gradient(circle at 30% 20%, rgba(0,229,255,.18), transparent 40%),
-                 radial-gradient(circle at 70% 25%, rgba(124,255,107,.15), transparent 45%),
-                 radial-gradient(circle at 50% 80%, rgba(255,204,0,.10), transparent 45%);
-      filter: blur(20px);
-      opacity:.65;
+
+    /* celebration modal */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center; justify-content:center;
+      background:rgba(0,0,0,.55);
+      z-index:999;
+      padding:18px;
+    }
+    .modal .panel{
+      width:min(520px, 92vw);
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(9,12,26,.92);
+      border-radius:22px;
+      box-shadow: var(--shadow);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .modal .panel:before{
+      content:"";
+      position:absolute; inset:-80px;
+      background:radial-gradient(circle at 30% 20%, rgba(0,229,255,.18), transparent 45%),
+                 radial-gradient(circle at 70% 30%, rgba(124,255,107,.16), transparent 45%),
+                 radial-gradient(circle at 50% 80%, rgba(255,204,0,.12), transparent 45%);
+      filter: blur(18px);
+      opacity:.9;
       pointer-events:none;
+    }
+    .modal .content{position:relative}
+    .modal h3{margin:0 0 8px; font-size:16px}
+    .modal p{margin:0 0 12px; color:rgba(234,240,255,.78)}
+    .toast{
+      position:fixed;
+      left:50%; bottom:16px;
+      transform:translateX(-50%);
+      padding:12px 14px;
+      background:rgba(9,12,26,.92);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:14px;
+      box-shadow: var(--shadow);
+      display:none;
+      z-index:1000;
+      max-width:min(720px, 92vw);
+      color:rgba(234,240,255,.92);
+      font-size:13px;
+    }
+
+    /* confetti canvas */
+    #confetti{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:998;
+      display:none;
     }
   </style>
 </head>
 
 <body class="stars">
+  <canvas id="confetti"></canvas>
+
   <div class="wrap">
     <div class="top">
       <div class="brand">
-        <span class="chip">NÍVEL 1</span>
-        <span>ConSySencI.A — Gerador de Landing</span>
+        <span class="chip">NÍVEL 1 • ATIVAÇÃO</span>
+        <span>ConSySencI.A — Sistema em Execução</span>
       </div>
-      <div class="chip">Cole seu link → Baixe o HTML</div>
+      <div class="chip">Faça em ordem: 1 → 2 → 3</div>
     </div>
 
     <div class="hero">
@@ -193,36 +291,79 @@
       <div class="card">
         <div class="glow"></div>
         <div class="pad">
-          <h1>Seu site pronto em 60 segundos.</h1>
+          <h1>Ative seu robô em 3 passos.</h1>
           <p>
-            Cole seu link de afiliado e gere automaticamente o arquivo <span class="k">index.html</span>
-            já com seu botão de compra funcionando.
+            Você vai entrar como afiliado, copiar seu <span class="k">link da página de vendas</span> e colar aqui.
+            A página vai gerar <b>3 textos prontos</b> + liberar o <b>Auto Reply</b> com tutorial.
           </p>
 
-          <div class="input">
-            <label for="aff">Seu link de afiliado (cole aqui)</label>
-            <input id="aff" placeholder="COLE SEU LINK DE AFILIADO AQUI" autocomplete="off" />
-            <div class="mini">Dica: precisa começar com <b>http</b> ou <b>https</b>.</div>
-          </div>
+          <div class="steps">
+            <div class="step" id="s1">
+              <div class="head">
+                <div>
+                  <h3>1) Entrar como afiliado (obrigatório)</h3>
+                  <p class="mini">Clique no botão, entre e confirme sua afiliação.</p>
+                </div>
+                <span class="badge">PASSO 1</span>
+              </div>
+              <div class="row">
+                <a class="btn primary" id="btnAfiliar" href="#" target="_blank" rel="noopener">
+                  ✅ Entrar como afiliado
+                </a>
+                <button class="btn" id="btnMarcar1">Já fiz isso</button>
+              </div>
+              <p class="mini">Depois de entrar como afiliado, vá para o PASSO 2.</p>
+            </div>
 
-          <div class="row">
-            <button class="btn primary" id="btnGerar">GERAR LANDING</button>
-            <button class="btn" id="btnCopiar" disabled>COPIAR CÓDIGO</button>
-            <button class="btn gold" id="btnBaixar" disabled>BAIXAR index.html</button>
-          </div>
+            <div class="step" id="s2">
+              <div class="head">
+                <div>
+                  <h3>2) Copiar seu link correto (na Kiwify)</h3>
+                  <p class="mini">Dentro do painel do produto (igual sua imagem):</p>
+                </div>
+                <span class="badge">PASSO 2</span>
+              </div>
+              <ul>
+                <li>Abra o produto e clique em <b>Detalhes</b></li>
+                <li>Copie a <b>URL da página de vendas</b> (é o seu link de afiliado)</li>
+                <li>Volte aqui e cole no campo do PASSO 3</li>
+              </ul>
+            </div>
 
-          <div class="ok" id="okBox"></div>
-          <div class="err" id="errBox"></div>
+            <div class="step" id="s3">
+              <div class="head">
+                <div>
+                  <h3>3) Cole seu link e gere seus textos</h3>
+                  <p class="mini">Cole a URL da página de vendas (aquela do “Detalhes”).</p>
+                </div>
+                <span class="badge">PASSO 3</span>
+              </div>
+
+              <div class="input">
+                <label for="aff">Cole aqui sua URL da página de vendas (afiliado)</label>
+                <input id="aff" placeholder="EX: https://consysencia-site.netlify.app/nivel1/  (ou seu link da Kiwify)" autocomplete="off" />
+                <div class="mini">Dica: precisa começar com <b>http</b> ou <b>https</b>.</div>
+              </div>
+
+              <div class="row">
+                <button class="btn gold" id="btnGerar">✨ GERAR 3 TEXTOS + AUTO REPLY</button>
+                <button class="btn" id="btnCopiarTudo" disabled>📋 COPIAR TUDO</button>
+              </div>
+
+              <div class="ok" id="okBox"></div>
+              <div class="err" id="errBox"></div>
+            </div>
+          </div>
 
           <div class="divider"></div>
 
           <div class="box">
-            <h3>✅ O que você vai ter ao final</h3>
-            <ul>
-              <li>Um site (landing) com seu link aplicado</li>
-              <li>Um link do seu site no ar (Netlify)</li>
-              <li>Um atendimento automático no WhatsApp</li>
-              <li>Um roteiro simples pra começar hoje</li>
+            <h3>✅ Resultado final (o que você vai ter)</h3>
+            <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.55">
+              <li>3 textos prontos (com seu link)</li>
+              <li>Mensagem pronta pro Auto Reply</li>
+              <li>Tutorial simples pra configurar <b>Grupos</b> ou <b>Ambas</b></li>
+              <li>Ritmo recomendado: <b>3x por dia</b></li>
             </ul>
           </div>
         </div>
@@ -232,47 +373,75 @@
       <div class="grid2">
         <div class="card">
           <div class="pad">
-            <h2 style="margin:0 0 10px;font-size:18px">Prévia do código gerado</h2>
-            <div class="code" id="codeBox">Cole seu link e clique em “GERAR LANDING”.</div>
+            <h2>📌 Seus textos prontos (gerados aqui)</h2>
+            <p class="mini">Cole seu link no PASSO 3 e clique em “GERAR”.</p>
+
+            <div class="box">
+              <h3>Mensagem para Auto Reply (copiar/colar)</h3>
+              <div class="code" id="replyBox">Aguardando seu link…</div>
+              <div class="row">
+                <button class="btn" id="cpyReply" disabled>Copiar mensagem</button>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>3 textos para postar (com seu link)</h3>
+              <div class="code" id="postsBox">Aguardando seu link…</div>
+              <div class="row">
+                <button class="btn" id="cpyPosts" disabled>Copiar 3 textos</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="autoReplyCard">
           <div class="pad">
-            <h2 style="margin:0 0 10px;font-size:18px">Tutorial simples (celular)</h2>
+            <h2>🤖 Auto Reply (liberado após gerar)</h2>
+            <p class="mini">Quando você gerar os textos, esta área fica “ativa” e te guia.</p>
 
             <div class="box">
-              <h3>1) GitHub (guardar seu arquivo)</h3>
-              <ul>
-                <li>Crie um repositório (ex.: <b>meu-nivel1</b>)</li>
-                <li>Envie o arquivo <b>index.html</b> (o que você baixou)</li>
+              <h3>Link oficial do app</h3>
+              <p class="mini" style="margin:0 0 10px">
+                Baixe no Google Play:
+                <b id="arLinkText">https://play.google.com/store/apps/details?id=com.pransuinc.autoreply</b>
+              </p>
+              <div class="row">
+                <a class="btn primary" id="btnAutoReply" href="#" target="_blank" rel="noopener">📥 Baixar Auto Reply</a>
+                <button class="btn" id="cpyArLink">Copiar link</button>
+              </div>
+              <p class="mini" style="margin-top:10px">
+                ✅ Use sempre o app oficial (como na sua imagem).
+              </p>
+            </div>
+
+            <div class="box">
+              <h3>Configuração mais fácil (igual seu print)</h3>
+              <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.55">
+                <li>Abra o Auto Reply</li>
+                <li>Toque no <b>+</b> (botão roxo)</li>
+                <li>Em <b>Responder por WA App</b>: escolha <b>Oficial de WA</b></li>
+                <li>Em <b>Padrão de mensagem recebida</b>:
+                  <ul>
+                    <li>Opção mais simples: coloque <b>*</b> e selecione <b>Todas</b></li>
+                    <li>Opção mais segura: selecione <b>Conter</b> e coloque “oi” ou “info”</li>
+                  </ul>
+                </li>
+                <li>Em <b>Responder a</b>: escolha <b>Grupos</b> ou <b>Ambas</b></li>
+                <li>Defina a resposta usando a mensagem pronta (aqui do lado)</li>
+                <li>Salve (✅) e ative o Auto Reply</li>
               </ul>
             </div>
 
             <div class="box">
-              <h3>2) Netlify (colocar no ar)</h3>
-              <ul>
-                <li>Entre em <b>netlify.com</b></li>
-                <li><b>Add new site → Import from Git</b></li>
-                <li>Conecte o GitHub e escolha seu repositório</li>
-                <li>Deploy → pronto ✅</li>
+              <h3>3x por dia (ritmo recomendado)</h3>
+              <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.55">
+                <li><b>09:00</b> — manhã</li>
+                <li><b>14:00</b> — tarde</li>
+                <li><b>20:00</b> — noite</li>
               </ul>
               <p class="mini" style="margin-top:8px">
-                Depois do deploy, copie o link do seu site tipo:
-                <b>https://seusite.netlify.app</b>
+                Você pode usar os <b>3 textos</b> gerados para postar/rodar no padrão que preferir.
               </p>
-            </div>
-
-            <div class="box">
-              <h3>3) Auto Reply (atendimento automático)</h3>
-              <p class="mini" style="margin:0 0 10px">
-                Baixe o app oficial aqui:
-                <b>https://play.google.com/store/apps/details?id=com.pransuinc.autoreply</b>
-              </p>
-              <ul>
-                <li>Configure para responder automaticamente no <b>privado</b></li>
-                <li>Use a mensagem pronta (abaixo) com seu link do site</li>
-              </ul>
             </div>
 
           </div>
@@ -281,228 +450,63 @@
       </div>
     </div>
 
-    <!-- EXTRA: Auto reply + textos + horários + desejo -->
-    <div class="card" style="margin-top:14px">
-      <div class="pad">
-        <h2 style="margin:0 0 10px;font-size:20px">📲 Mensagens prontas + horários (começar hoje)</h2>
-        <p class="mini">
-          Regra de ouro: poste 1x por dia em grupos onde divulgação é permitida (manual, 30 segundos) e deixe o Auto Reply
-          responder automaticamente quem chamar no privado. Isso mantém sua conta segura e sua conversão alta.
+    <div class="foot">© ConSySencI.A — Ativação Nível 1</div>
+  </div>
+
+  <!-- Celebration modal -->
+  <div class="modal" id="modal">
+    <div class="panel">
+      <div class="content">
+        <h3>🎉 Ativação concluída!</h3>
+        <p>
+          Seus textos foram gerados com seu link e o Auto Reply foi liberado.
+          Agora é só <b>copiar/colar</b> e colocar a máquina pra rodar.
         </p>
-
-        <div class="box">
-          <h3>Mensagem de Auto Reply (privado) — copiar/colar</h3>
-          <div class="code" id="replyTemplate">Oi 👋
-Tenho um kit simples pra começar hoje: landing pronta + tutorial (tudo copiar/colar).
-Aqui está o link: SEU_LINK_DO_SITE_AQUI
-Se quiser, eu te explico em 30 segundos.</div>
-          <p class="mini" style="margin-top:8px">
-            Troque <b>SEU_LINK_DO_SITE_AQUI</b> pelo link do seu site no Netlify.
-          </p>
+        <div class="row">
+          <button class="btn primary" id="goAutoReply">Ir para Auto Reply</button>
+          <button class="btn" id="closeModal">Fechar</button>
         </div>
-
-        <div class="box">
-          <h3>3 textos para postar em grupos (1x ao dia)</h3>
-          <div class="code">Texto 1:
-🧩 Kit copiar/colar pra começar hoje (R$10)
-Landing pronta + tutorial + atendimento automático
-Link: SEU_LINK_DO_SITE_AQUI
-
-Texto 2:
-Quem quer começar no online sem aparecer?
-É só copiar/colar e divulgar com constância.
-Link: SEU_LINK_DO_SITE_AQUI
-
-Texto 3:
-Não é curso gigante. É execução simples.
-Página pronta + passo a passo (R$10).
-Link: SEU_LINK_DO_SITE_AQUI</div>
-        </div>
-
-        <div class="box">
-          <h3>Horários recomendados</h3>
-          <ul>
-            <li><b>09:00</b> (manhã)</li>
-            <li><b>14:00</b> (tarde)</li>
-            <li><b>20:00</b> (noite)</li>
-          </ul>
-          <p class="mini" style="margin-top:8px">
-            Você escolhe um horário por dia para postagem manual em grupos. O Auto Reply cuida do atendimento depois.
-          </p>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="box">
-          <h3>🔥 Próximo desbloqueio (Nível 2)</h3>
-          <p style="margin:0;color:var(--muted)">
-            Se você executar isso por 2–3 dias, vai acontecer uma coisa inevitável: <b>vão chegar perguntas repetidas</b> e você vai
-            sentir que está perdendo tempo respondendo ou travando na divulgação.
-            <br><br>
-            No <span class="k">Nível 2</span> você desbloqueia:
-          </p>
-          <ul style="margin-top:10px">
-            <li>Imagens prontas pra divulgar (sem travar)</li>
-            <li>Scripts de vendas (pra converter sem improviso)</li>
-            <li>Títulos/descrições para redes sociais</li>
-            <li>Uma landing mais forte (mais clique, mais compra)</li>
-            <li>Respostas rápidas organizadas (venda fluindo)</li>
-          </ul>
-          <p class="mini" style="margin-top:10px">
-            Nível 1 = ligar a máquina. <b>Nível 2 = fazer ela produzir com consistência.</b>
-          </p>
-        </div>
-
       </div>
     </div>
-
-    <div class="foot">© ConSySencI.A — Gerador Nível 1</div>
   </div>
+
+  <div class="toast" id="toast"></div>
 
 <script>
-  // ========== TEMPLATES ==========
-  function landingTemplate(affiliateLink) {
-    // Landing final que o aluno vai baixar como index.html
-    // Mantida simples, linda e mobile-first
-    return `<!doctype html>
-<html lang="pt-br">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nível 1 — Ativação Automática</title>
-  <meta name="description" content="Kit copiar/colar pra começar hoje: landing pronta + tutorial." />
-  <style>
-    :root{
-      --bg:#050714; --bg2:#070B22; --card:rgba(255,255,255,.06); --stroke:rgba(255,255,255,.12);
-      --txt:#EAF0FF; --muted:#B7C5FF; --cyan:#00E5FF; --lime:#7CFF6B; --gold:#FFCC00;
-      --shadow: 0 18px 70px rgba(0,0,0,.55); --radius: 18px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--txt);
-      background:
-        radial-gradient(1200px 700px at 12% 10%, rgba(0,229,255,.22), transparent 60%),
-        radial-gradient(900px 650px at 86% 22%, rgba(124,255,107,.18), transparent 62%),
-        radial-gradient(900px 650px at 50% 92%, rgba(255,204,0,.10), transparent 60%),
-        linear-gradient(180deg,var(--bg),var(--bg2));
-      min-height:100vh;
-    }
-    .wrap{max-width:980px;margin:0 auto;padding:22px}
-    .top{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:14px 16px;border:1px solid var(--stroke);border-radius:var(--radius);
-      background:rgba(255,255,255,.05);backdrop-filter: blur(10px); box-shadow:var(--shadow);
-    }
-    .brand{display:flex;gap:10px;align-items:center;font-weight:900}
-    .chip{
-      font-size:12px;font-weight:900;padding:8px 12px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background:linear-gradient(90deg, rgba(0,229,255,.22), rgba(124,255,107,.16));
-    }
-    .hero{margin-top:16px;display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-    @media(max-width:860px){.hero{grid-template-columns:1fr}}
-    .card{border:1px solid var(--stroke);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
-    .pad{padding:18px}
-    h1{margin:0 0 10px;font-size:34px;line-height:1.05}
-    p{margin:0 0 10px;color:var(--muted);line-height:1.55}
-    .k{color:var(--gold);font-weight:900}
-    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-    .pill{font-size:12px;font-weight:800;padding:8px 10px;border-radius:999px;
-      border:1px solid rgba(0,229,255,.26); background:rgba(0,229,255,.10)}
-    .price{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(90deg, rgba(124,255,107,.16), rgba(0,229,255,.12))}
-    .price strong{font-size:22px;color:var(--txt)}
-    .btn{
-      display:block; text-decoration:none; text-align:center; margin-top:12px;
-      padding:14px 14px;border-radius:14px;font-weight:900;
-      background:linear-gradient(90deg, rgba(0,229,255,.95), rgba(124,255,107,.90));
-      color:#061018; border:0;
-    }
-    .box{margin-top:12px;padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.18)}
-    .box h3{margin:0 0 8px;font-size:14px}
-    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.55}
-    .foot{margin-top:14px;text-align:center;font-size:12px;color:rgba(234,240,255,.70)}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand"><span class="chip">NÍVEL 1</span> <span>ConSySencI.A</span></div>
-      <div class="chip">ATIVAÇÃO AUTOMÁTICA</div>
-    </div>
+  // ========= LINKS FIXOS (SEU SISTEMA) =========
+  const KIWI_AFFILIATE_JOIN = "https://dashboard.kiwify.com/join/affiliate/SowuJ1bL";
+  const AUTO_REPLY_PLAYSTORE = "https://play.google.com/store/apps/details?id=com.pransuinc.autoreply";
 
-    <div class="hero">
-      <div class="card">
-        <div class="pad">
-          <h1>Kit copiar/colar pra começar hoje.</h1>
-          <p>Você recebe uma página pronta + um passo a passo simples. É só plugar e rodar.</p>
-
-          <div class="pillrow">
-            <div class="pill">Landing pronta (HTML)</div>
-            <div class="pill">Tutorial pelo celular</div>
-            <div class="pill">Começar hoje</div>
-          </div>
-
-          <div class="price">
-            <div><strong>Só R$10</strong><br><span style="color:var(--muted);font-size:13px">Acesso imediato • Execução simples</span></div>
-            <div class="chip">Entrada rápida</div>
-          </div>
-
-          <a class="btn" href="${affiliateLink}" target="_blank" rel="noopener">ATIVAR AGORA</a>
-
-          <p style="margin-top:10px"><span class="k">Importante:</span> é simples. Quem executa, entende.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="pad">
-          <div class="box">
-            <h3>✅ O que você recebe</h3>
-            <ul>
-              <li>Página pronta</li>
-              <li>Passo a passo simples</li>
-              <li>Roteiro de divulgação</li>
-            </ul>
-          </div>
-
-          <div class="box">
-            <h3>📌 Pra quem é</h3>
-            <ul>
-              <li>Quem quer começar sem aparecer</li>
-              <li>Quem quer copiar/colar</li>
-              <li>Quem quer algo simples e replicável</li>
-            </ul>
-          </div>
-
-          <div class="box">
-            <h3>🔥 Próximo nível</h3>
-            <p style="margin:0">
-              No Nível 2 você desbloqueia materiais prontos e estrutura pra converter com consistência.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="foot">© ConSySencI.A — Nível 1</div>
-  </div>
-</body>
-</html>`;
-  }
-
-  // ========== HELPERS ==========
+  // ========= ELEMENTOS =========
+  const btnAfiliar = document.getElementById("btnAfiliar");
+  const btnAutoReply = document.getElementById("btnAutoReply");
   const aff = document.getElementById("aff");
+
   const btnGerar = document.getElementById("btnGerar");
-  const btnCopiar = document.getElementById("btnCopiar");
-  const btnBaixar = document.getElementById("btnBaixar");
-  const codeBox = document.getElementById("codeBox");
+  const btnCopiarTudo = document.getElementById("btnCopiarTudo");
+  const cpyReply = document.getElementById("cpyReply");
+  const cpyPosts = document.getElementById("cpyPosts");
+
+  const replyBox = document.getElementById("replyBox");
+  const postsBox = document.getElementById("postsBox");
+
   const okBox = document.getElementById("okBox");
   const errBox = document.getElementById("errBox");
 
-  let lastCode = "";
+  const toastEl = document.getElementById("toast");
+  const modal = document.getElementById("modal");
+  const closeModal = document.getElementById("closeModal");
+  const goAutoReply = document.getElementById("goAutoReply");
 
+  const arLinkText = document.getElementById("arLinkText");
+  const cpyArLink = document.getElementById("cpyArLink");
+  const btnMarcar1 = document.getElementById("btnMarcar1");
+
+  btnAfiliar.href = KIWI_AFFILIATE_JOIN;
+  btnAutoReply.href = AUTO_REPLY_PLAYSTORE;
+  arLinkText.textContent = AUTO_REPLY_PLAYSTORE;
+
+  // ========= UI HELPERS =========
   function showOk(msg){
     okBox.style.display = "block";
     errBox.style.display = "none";
@@ -513,6 +517,12 @@ Link: SEU_LINK_DO_SITE_AQUI</div>
     okBox.style.display = "none";
     errBox.innerHTML = msg;
   }
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.style.display = "block";
+    clearTimeout(window.__t);
+    window.__t = setTimeout(()=> toastEl.style.display = "none", 2100);
+  }
 
   function isValidUrl(u){
     try{
@@ -521,22 +531,11 @@ Link: SEU_LINK_DO_SITE_AQUI</div>
     }catch(e){ return false; }
   }
 
-  function downloadFile(filename, content){
-    const blob = new Blob([content], {type:"text/html;charset=utf-8"});
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 0);
-  }
-
   async function copyText(text){
     try{
       await navigator.clipboard.writeText(text);
       return true;
     }catch(e){
-      // fallback
       const ta = document.createElement("textarea");
       ta.value = text;
       document.body.appendChild(ta);
@@ -547,12 +546,98 @@ Link: SEU_LINK_DO_SITE_AQUI</div>
     }
   }
 
-  // ========== ACTIONS ==========
+  // ========= TEMPLATES =========
+  function buildReply(link){
+    return `Oi 👋\n\nEu tenho um kit simples pra começar hoje: landing pronta + passo a passo (tudo copiar/colar).\n\n✅ Acesse aqui: ${link}\n\nSe quiser, eu te explico em 30 segundos.`;
+  }
+
+  function buildPosts(link){
+    return [
+`TEXTO 1:\n🧩 Kit copiar/colar pra começar hoje (R$10)\nLanding pronta + tutorial + automação simples\nLink: ${link}`,
+`TEXTO 2:\nQuem quer começar no online sem aparecer?\nÉ só copiar/colar e divulgar com constância.\nLink: ${link}`,
+`TEXTO 3:\nNão é curso gigante. É execução simples.\nPágina pronta + passo a passo (R$10).\nLink: ${link}`
+    ].join("\n\n---------------------------\n\n");
+  }
+
+  // ========= CONFETTI (celebração séria e bonita) =========
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  let confettiPieces = [];
+  let confettiOn = false;
+
+  function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  function spawnConfetti(){
+    confettiPieces = [];
+    const colors = ["#00E5FF", "#7CFF6B", "#FFCC00", "#EAF0FF"];
+    for(let i=0;i<160;i++){
+      confettiPieces.push({
+        x: Math.random()*canvas.width,
+        y: -20 - Math.random()*canvas.height*0.2,
+        r: 4 + Math.random()*5,
+        vx: -1.5 + Math.random()*3,
+        vy: 2 + Math.random()*4.2,
+        rot: Math.random()*Math.PI,
+        vr: -0.12 + Math.random()*0.24,
+        c: colors[Math.floor(Math.random()*colors.length)],
+        a: 0.85
+      });
+    }
+  }
+
+  function drawConfetti(){
+    if(!confettiOn) return;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(const p of confettiPieces){
+      ctx.save();
+      ctx.globalAlpha = p.a;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.c;
+      ctx.fillRect(-p.r, -p.r/2, p.r*2.2, p.r);
+      ctx.restore();
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      p.vy += 0.03; // gravity
+      if(p.y > canvas.height + 40) p.a = 0;
+    }
+
+    // stop when mostly invisible
+    const alive = confettiPieces.some(p => p.a > 0.05);
+    if(alive) requestAnimationFrame(drawConfetti);
+    else {
+      confettiOn = false;
+      canvas.style.display = "none";
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
+  }
+
+  function celebrate(){
+    resizeCanvas();
+    spawnConfetti();
+    confettiOn = true;
+    canvas.style.display = "block";
+    requestAnimationFrame(drawConfetti);
+  }
+
+  // ========= AÇÕES =========
+  btnMarcar1.addEventListener("click", ()=>{
+    toast("✅ Passo 1 marcado. Agora copie o link em “Detalhes” (PASSO 2).");
+    document.getElementById("s2").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
   btnGerar.addEventListener("click", ()=>{
     const link = (aff.value || "").trim();
 
     if(!link){
-      showErr("Cole seu link de afiliado no campo acima.");
+      showErr("Cole a <b>URL da página de vendas</b> (no painel → Detalhes).");
       return;
     }
     if(!isValidUrl(link)){
@@ -560,26 +645,59 @@ Link: SEU_LINK_DO_SITE_AQUI</div>
       return;
     }
 
-    lastCode = landingTemplate(link);
-    codeBox.textContent = lastCode;
+    const reply = buildReply(link);
+    const posts = buildPosts(link);
 
-    btnCopiar.disabled = false;
-    btnBaixar.disabled = false;
+    replyBox.textContent = reply;
+    postsBox.textContent = posts;
 
-    showOk("✅ Landing gerada com sucesso. Agora clique em <b>BAIXAR index.html</b> e publique no Netlify.");
+    btnCopiarTudo.disabled = false;
+    cpyReply.disabled = false;
+    cpyPosts.disabled = false;
+
+    showOk("✅ Textos gerados com seu link. Agora copie e configure o Auto Reply (logo abaixo).");
+
+    toast("🎉 Gerado! Seus textos estão prontos.");
+    celebrate();
+
+    // open celebration modal
+    modal.style.display = "flex";
   });
 
-  btnCopiar.addEventListener("click", async ()=>{
-    if(!lastCode) return;
-    const ok = await copyText(lastCode);
-    if(ok) showOk("✅ Código copiado. Se quiser, você pode colar no arquivo <b>index.html</b> direto no GitHub.");
-    else showErr("Não consegui copiar automaticamente. Selecione o código e copie manualmente.");
+  cpyReply.addEventListener("click", async ()=>{
+    const ok = await copyText(replyBox.textContent);
+    ok ? toast("✅ Mensagem do Auto Reply copiada!") : toast("❌ Não consegui copiar. Copie manualmente.");
   });
 
-  btnBaixar.addEventListener("click", ()=>{
-    if(!lastCode) return;
-    downloadFile("index.html", lastCode);
-    showOk("✅ Arquivo <b>index.html</b> baixado. Agora suba no GitHub e publique no Netlify.");
+  cpyPosts.addEventListener("click", async ()=>{
+    const ok = await copyText(postsBox.textContent);
+    ok ? toast("✅ 3 textos copiados!") : toast("❌ Não consegui copiar. Copie manualmente.");
+  });
+
+  btnCopiarTudo.addEventListener("click", async ()=>{
+    const all = `MENSAGEM AUTO REPLY:\n\n${replyBox.textContent}\n\n===========================\n\n3 TEXTOS PARA POSTAR:\n\n${postsBox.textContent}\n`;
+    const ok = await copyText(all);
+    ok ? toast("✅ Tudo copiado (Auto Reply + 3 textos)!") : toast("❌ Não consegui copiar. Copie manualmente.");
+  });
+
+  cpyArLink.addEventListener("click", async ()=>{
+    const ok = await copyText(AUTO_REPLY_PLAYSTORE);
+    ok ? toast("✅ Link do Auto Reply copiado!") : toast("❌ Não consegui copiar.");
+  });
+
+  closeModal.addEventListener("click", ()=>{
+    modal.style.display = "none";
+  });
+
+  goAutoReply.addEventListener("click", ()=>{
+    modal.style.display = "none";
+    document.getElementById("autoReplyCard").scrollIntoView({behavior:"smooth", block:"start"});
+    toast("👇 Aqui está o passo a passo do Auto Reply.");
+  });
+
+  // Close modal clicking outside
+  modal.addEventListener("click", (e)=>{
+    if(e.target === modal) modal.style.display = "none";
   });
 </script>
 </body>
