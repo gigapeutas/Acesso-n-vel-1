@@ -1,793 +1,917 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>ConSySencI.A — Ativação Nível 1</title>
-  <meta name="description" content="Ative seu sistema: entre como afiliado, cole seu link da página de vendas e gere 3 textos + configuração do Auto Reply."/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ConSySencI.A — Nível 1 | Ativação do Sistema</title>
+  <meta name="description" content="Ative seu sistema ConSySencI.A Nível 1. Cole seu link de afiliado e gere 3 anúncios prontos (manhã, tarde e noite) + passo a passo de configuração no AutoReply." />
+  <meta name="theme-color" content="#070A12" />
   <style>
     :root{
-      --bg0:#050714;
-      --bg1:#070B22;
-      --card:rgba(255,255,255,.06);
-      --stroke:rgba(255,255,255,.12);
-      --txt:#EAF0FF;
-      --muted:#B7C5FF;
-      --cyan:#00E5FF;
-      --lime:#7CFF6B;
-      --gold:#FFCC00;
-      --red:#FF5C5C;
-      --shadow: 0 18px 70px rgba(0,0,0,.55);
-      --radius: 18px;
+      --bg:#070A12;
+      --panel:#0B1220;
+      --panel2:#0D1628;
+      --text:#EAF2FF;
+      --muted:#A6B3D0;
+      --line:rgba(255,255,255,.10);
+      --neon:#31F7A5;
+      --neon2:#2BE6FF;
+      --warn:#FFB020;
+      --danger:#FF4D4D;
+      --ok:#36F28D;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+      --max: 1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--txt);
+      font-family:var(--sans);
+      color:var(--text);
       background:
-        radial-gradient(1400px 700px at 12% 10%, rgba(0,229,255,.20), transparent 60%),
-        radial-gradient(900px 650px at 86% 22%, rgba(124,255,107,.18), transparent 62%),
-        radial-gradient(900px 650px at 50% 92%, rgba(255,204,0,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+        radial-gradient(900px 520px at 15% 0%, rgba(49,247,165,.18), transparent 60%),
+        radial-gradient(900px 520px at 95% 10%, rgba(43,230,255,.14), transparent 55%),
+        radial-gradient(700px 500px at 50% 110%, rgba(49,247,165,.10), transparent 55%),
+        linear-gradient(180deg, #050812, #070A12 40%, #05070F);
       min-height:100vh;
-      overflow-x:hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      padding: 28px 16px 70px;
     }
 
-    /* stars */
-    .stars:before, .stars:after{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      background-image:
-        radial-gradient(2px 2px at 12% 18%, rgba(255,255,255,.55), transparent 60%),
-        radial-gradient(1px 1px at 40% 68%, rgba(255,255,255,.40), transparent 60%),
-        radial-gradient(1px 1px at 80% 30%, rgba(255,255,255,.35), transparent 60%),
-        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,.35), transparent 60%),
-        radial-gradient(2px 2px at 88% 62%, rgba(255,255,255,.40), transparent 60%),
-        radial-gradient(1px 1px at 18% 82%, rgba(255,255,255,.35), transparent 60%),
-        radial-gradient(1px 1px at 55% 22%, rgba(255,255,255,.35), transparent 60%);
-      opacity:.35;
-      transform: translateZ(0);
-    }
-    .stars:after{opacity:.20; filter: blur(0.4px)}
+    .wrap{ max-width: var(--max); margin:0 auto; }
 
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding: clamp(14px, 3.6vw, 22px);
-    }
-
-    /* ✅ RESPONSIVE TOP */
-    .top{
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      padding:14px 16px;
-      border:1px solid var(--stroke);
-      border-radius: var(--radius);
-      background:rgba(255,255,255,.05);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
+      margin-bottom:18px;
     }
-
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-weight:900;
-      letter-spacing:.2px;
-      min-width:0;
+      gap:12px;
     }
+    .badge{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(49,247,165,.28), rgba(43,230,255,.20));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      display:grid; place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .badge::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 200deg, rgba(49,247,165,.0), rgba(49,247,165,.35), rgba(43,230,255,.0));
+      animation: spin 5.5s linear infinite;
+    }
+    .badge span{
+      position:relative;
+      font-weight:900;
+      color: rgba(234,242,255,.95);
+      text-shadow: 0 0 18px rgba(49,247,165,.22);
+    }
+    @keyframes spin{ to{ transform:rotate(360deg);} }
 
+    .brand h1{
+      margin:0;
+      font-size: 18px;
+      line-height:1.1;
+      letter-spacing:.4px;
+    }
+    .brand p{
+      margin:2px 0 0;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
     .chip{
       font-size:12px;
-      font-weight:900;
-      padding:8px 12px;
+      padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background:linear-gradient(90deg, rgba(0,229,255,.22), rgba(124,255,107,.16));
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(13,22,40,.65);
+      color: rgba(234,242,255,.9);
+      display:flex;
+      align-items:center;
+      gap:8px;
       white-space:nowrap;
     }
-
-    @media (max-width: 520px){
-      .top{
-        flex-direction:column;
-        align-items:stretch;
-        text-align:center;
-        gap:10px;
-      }
-      .brand{
-        flex-direction:column;
-        gap:8px;
-      }
-      .brand span:last-child{
-        font-size:14px;
-        line-height:1.2;
-        opacity:.95;
-      }
-      .top .chip{
-        width:fit-content;
-        margin:0 auto;
-      }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background: var(--ok);
+      box-shadow: 0 0 14px rgba(54,242,141,.55);
     }
 
     .hero{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:14px;
-      align-items:start;
-    }
-    @media (max-width:960px){
-      .hero{grid-template-columns:1fr}
-    }
-
-    .card{
-      border:1px solid var(--stroke);
-      border-radius: var(--radius);
-      background:var(--card);
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(11,18,32,.78), rgba(7,10,18,.55));
       box-shadow: var(--shadow);
-      overflow:hidden;
+      padding: 22px 18px;
       position:relative;
+      overflow:hidden;
     }
-    .pad{padding:18px}
-
-    h1{
-      margin:0 0 10px;
-      font-size: clamp(26px, 5.4vw, 40px);
-      line-height:1.05;
-      letter-spacing:-0.2px;
-    }
-    h2{margin:0 0 10px;font-size:18px}
-    p{margin:0 0 10px;color:var(--muted);line-height:1.55}
-    .k{color:var(--gold);font-weight:900}
-    .mini{font-size:12px;color:rgba(234,240,255,.72)}
-
-    .glow{
-      position:absolute;inset:-120px;
-      background:radial-gradient(circle at 30% 20%, rgba(0,229,255,.18), transparent 40%),
-                 radial-gradient(circle at 70% 25%, rgba(124,255,107,.15), transparent 45%),
-                 radial-gradient(circle at 50% 80%, rgba(255,204,0,.10), transparent 45%);
-      filter: blur(20px);
-      opacity:.65;
+    .hero::before{
+      content:"";
+      position:absolute; inset:-60px;
+      background:
+        radial-gradient(420px 220px at 30% 20%, rgba(49,247,165,.20), transparent 60%),
+        radial-gradient(380px 220px at 85% 25%, rgba(43,230,255,.14), transparent 60%);
       pointer-events:none;
     }
-
-    .steps{
+    .hero .grid{
       display:grid;
-      grid-template-columns:1fr;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      position:relative;
+    }
+    @media (max-width: 860px){
+      .hero .grid{ grid-template-columns: 1fr; }
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
       gap:10px;
-      margin-top:12px;
-    }
-
-    .step{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.18);
-      border-radius:16px;
-      padding:14px;
-    }
-
-    .step .head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap; /* ✅ quebra bonito */
-    }
-
-    .badge{
-      font-size:12px;
-      font-weight:900;
-      padding:6px 10px;
+      padding: 8px 12px;
       border-radius:999px;
+      background: rgba(13,22,40,.70);
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      color:rgba(234,240,255,.92);
-      white-space:nowrap;
-      margin-left:auto;
+      color: rgba(234,242,255,.92);
+      font-size:12.5px;
+      width:fit-content;
+      margin-bottom: 10px;
+    }
+    .kicker b{ color: var(--neon); }
+    .hero h2{
+      margin: 8px 0 8px;
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: .2px;
+    }
+    .hero .sub{
+      margin: 0 0 12px;
+      color: rgba(234,242,255,.86);
+      font-size: 14.5px;
+      line-height: 1.55;
+      max-width: 56ch;
     }
 
-    .step h3{margin:0 0 6px;font-size:14px}
-    .step ul{margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.55}
-
-    .divider{height:1px;background:rgba(255,255,255,.10);margin:14px 0}
-
-    .input{
+    .actions{
       display:flex;
-      flex-direction:column;
+      flex-wrap:wrap;
       gap:10px;
-      margin-top:12px
+      margin-top: 12px;
     }
-    label{font-size:13px;color:rgba(234,240,255,.85);font-weight:800}
+    .btn{
+      appearance:none;
+      border:0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 750;
+      font-size: 14px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      user-select:none;
+    }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(49,247,165,.95), rgba(43,230,255,.70));
+      color:#07101a;
+      box-shadow: 0 16px 32px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.10) inset;
+    }
+    .btn.ghost{
+      background: rgba(13,22,40,.55);
+      color: rgba(234,242,255,.92);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .btn:hover{ filter: brightness(1.03); box-shadow: 0 18px 34px rgba(0,0,0,.42); }
 
-    input{
-      width:100%;
-      padding:14px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(0,0,0,.20);
-      color:var(--txt);
-      outline:none;
-      font-size:14px;
+    .panel{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
-    input:focus{
-      border-color: rgba(0,229,255,.45);
-      box-shadow: 0 0 0 4px rgba(0,229,255,.12);
+    @media (max-width: 980px){
+      .panel{ grid-template-columns: 1fr; }
+    }
+    .card{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(11,18,32,.70);
+      box-shadow: 0 12px 32px rgba(0,0,0,.35);
+      padding: 16px;
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 15px;
+      letter-spacing: .2px;
+    }
+    .card p{
+      margin: 0 0 12px;
+      color: rgba(234,242,255,.82);
+      font-size: 13.5px;
+      line-height:1.55;
     }
 
-    .row{
+    .field{
+      display:grid;
+      gap:8px;
+    }
+    label{
+      font-size: 12.5px;
+      color: rgba(234,242,255,.88);
+    }
+    .inputRow{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:12px
-    }
-
-    .btn{
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.06);
-      color:var(--txt);
-      padding:12px 14px;
-      border-radius:14px;
-      font-weight:900;
-      cursor:pointer;
-      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
-      user-select:none;
-      text-decoration:none;
-      display:inline-flex;
       align-items:center;
-      justify-content:center;
+    }
+    input[type="url"], input[type="text"]{
+      flex: 1 1 420px;
+      min-width: 240px;
+      background: rgba(7,10,18,.55);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(234,242,255,.92);
+      border-radius: 14px;
+      padding: 12px 12px;
+      outline:none;
+      font-size: 14px;
+    }
+    input::placeholder{ color: rgba(166,179,208,.65); }
+    .hint{
+      font-size: 12px;
+      color: rgba(166,179,208,.92);
+      line-height: 1.45;
+    }
+    .hint b{ color: var(--neon); }
+
+    .status{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(13,22,40,.55);
+      display:flex;
       gap:10px;
-      min-height:44px;
-    }
-    .btn:hover{transform:translateY(-1px);opacity:.95}
-    .btn:disabled{opacity:.55; cursor:not-allowed; transform:none}
-    .btn.primary{
-      background:linear-gradient(90deg, rgba(0,229,255,.95), rgba(124,255,107,.90));
-      color:#061018;
-      border-color: rgba(255,255,255,.0);
-      box-shadow: 0 14px 30px rgba(0,229,255,.14);
-    }
-    .btn.gold{
-      background:linear-gradient(90deg, rgba(255,204,0,.92), rgba(0,229,255,.55));
-      color:#061018;
-      border-color: rgba(255,255,255,.0);
-    }
-
-    /* ✅ MOBILE: botões em coluna */
-    @media (max-width: 520px){
-      .row{flex-direction:column}
-      .btn{width:100%}
-      .pad{padding:16px}
-    }
-
-    .ok, .err{
-      margin-top:10px;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.20);
-      display:none;
-      font-size:13px;
+      align-items:flex-start;
+      color: rgba(234,242,255,.88);
+      font-size: 12.8px;
       line-height:1.45;
     }
-    .ok{border-color: rgba(124,255,107,.28)}
-    .err{border-color: rgba(255,92,92,.28)}
-
-    .grid2{display:grid;grid-template-columns:1fr;gap:12px}
-    .box{
-      border:1px solid var(--stroke);
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      padding:14px;
+    .status .icon{
+      width:22px;height:22px;border-radius:10px;
+      background: rgba(49,247,165,.16);
+      border: 1px solid rgba(49,247,165,.35);
+      display:grid; place-items:center;
+      flex:0 0 auto;
     }
-    .box h3{margin:0 0 8px;font-size:14px}
+    .status.warn .icon{
+      background: rgba(255,176,32,.14);
+      border-color: rgba(255,176,32,.35);
+    }
+    .status.danger .icon{
+      background: rgba(255,77,77,.12);
+      border-color: rgba(255,77,77,.35);
+    }
 
-    .code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size:12px;
-      background:rgba(0,0,0,.26);
+    .gen{
+      margin-top: 12px;
+      display:grid;
+      gap: 12px;
+    }
+    .msg{
+      border-radius: 16px;
       border:1px solid rgba(255,255,255,.12);
-      border-radius:14px;
-      padding:12px;
-      white-space:pre-wrap;
-      overflow:auto;
-      max-height:320px;
-      word-break:break-word;
-    }
-
-    .foot{
-      margin-top:14px;
-      text-align:center;
-      font-size:12px;
-      color:rgba(234,240,255,.70);
-    }
-
-    /* modal */
-    .modal{
-      position:fixed; inset:0;
-      display:none;
-      align-items:center; justify-content:center;
-      background:rgba(0,0,0,.55);
-      z-index:999;
-      padding:18px;
-    }
-    .modal .panel{
-      width:min(520px, 92vw);
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(9,12,26,.92);
-      border-radius:22px;
-      box-shadow: var(--shadow);
-      padding:16px;
-      position:relative;
+      background: rgba(7,10,18,.55);
+      padding: 12px;
       overflow:hidden;
     }
-    .modal .panel:before{
-      content:"";
-      position:absolute; inset:-80px;
-      background:radial-gradient(circle at 30% 20%, rgba(0,229,255,.18), transparent 45%),
-                 radial-gradient(circle at 70% 30%, rgba(124,255,107,.16), transparent 45%),
-                 radial-gradient(circle at 50% 80%, rgba(255,204,0,.12), transparent 45%);
-      filter: blur(18px);
-      opacity:.9;
-      pointer-events:none;
+    .msgHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+      flex-wrap:wrap;
     }
-    .modal .content{position:relative}
-    .modal h3{margin:0 0 8px; font-size:16px}
-    .modal p{margin:0 0 12px; color:rgba(234,240,255,.78)}
-
-    /* toast */
-    .toast{
-      position:fixed;
-      left:50%; bottom:16px;
-      transform:translateX(-50%);
-      padding:12px 14px;
-      background:rgba(9,12,26,.92);
-      border:1px solid rgba(255,255,255,.16);
-      border-radius:14px;
-      box-shadow: var(--shadow);
-      display:none;
-      z-index:1000;
-      max-width:min(720px, 92vw);
-      color:rgba(234,240,255,.92);
-      font-size:13px;
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(11,18,32,.70);
+      font-size: 12px;
+      color: rgba(234,242,255,.9);
+      white-space:nowrap;
+    }
+    .tag b{ color: var(--neon); }
+    .mini{
+      font-size: 12px;
+      color: rgba(166,179,208,.95);
+      line-height: 1.45;
+    }
+    textarea{
+      width:100%;
+      min-height: 188px;
+      resize: vertical;
+      background: transparent;
+      border: 0;
+      color: rgba(234,242,255,.92);
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.45;
+      outline:none;
+      padding: 0;
+      white-space: pre-wrap;
     }
 
-    /* confetti canvas */
-    #confetti{
-      position:fixed; inset:0;
-      pointer-events:none;
-      z-index:998;
-      display:none;
+    .step{
+      display:grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .stepItem{
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(11,18,32,.70);
+      padding: 14px;
+    }
+    .stepItem h4{
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:.2px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .num{
+      width:24px;height:24px;border-radius:10px;
+      background: rgba(49,247,165,.16);
+      border: 1px solid rgba(49,247,165,.35);
+      display:grid; place-items:center;
+      color: rgba(234,242,255,.95);
+      font-weight:800;
+      font-size: 12px;
+      flex:0 0 auto;
+    }
+    .stepItem p{
+      margin:0;
+      color: rgba(234,242,255,.84);
+      font-size: 13.5px;
+      line-height:1.6;
+    }
+    .stepItem ul{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: rgba(234,242,255,.84);
+      font-size: 13.5px;
+      line-height:1.6;
     }
 
-    /* small accessibility */
-    a{color:inherit}
-    .sr{position:absolute;left:-9999px}
+    .footer{
+      margin-top: 18px;
+      text-align:center;
+      color: rgba(166,179,208,.92);
+      font-size: 12.5px;
+    }
+    .footer b{ color: var(--neon); }
+
+    .row2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 980px){
+      .row2{ grid-template-columns: 1fr; }
+    }
+
+    .divider{
+      height:1px;
+      background: rgba(255,255,255,.10);
+      margin: 12px 0;
+    }
+    .smallcaps{
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(166,179,208,.9);
+    }
   </style>
 </head>
 
-<body class="stars">
-  <canvas id="confetti"></canvas>
-
+<body>
   <div class="wrap">
-    <div class="top">
+    <div class="topbar">
       <div class="brand">
-        <span class="chip">NÍVEL 1 • ATIVAÇÃO</span>
-        <span>ConSySencI.A — Sistema em Execução</span>
+        <div class="badge" aria-hidden="true"><span>🧠</span></div>
+        <div>
+          <h1>ConSySencI.A — Nível 1</h1>
+          <p>Ativação do Sistema • Autoreply (grátis) • Escala + Ecossistema</p>
+        </div>
       </div>
-      <div class="chip">Faça em ordem: 1 → 2 → 3</div>
+      <div class="chip"><span class="dot"></span> Pronto para copiar e colar</div>
     </div>
 
-    <div class="hero">
-      <!-- LEFT -->
-      <div class="card">
-        <div class="glow"></div>
-        <div class="pad">
-          <h1>Ative seu robô em 3 passos.</h1>
-          <p>
-            Você vai entrar como afiliado, copiar seu <span class="k">link da página de vendas</span> e colar aqui.
-            A página vai gerar <b>3 textos prontos</b> + liberar o <b>Auto Reply</b> com tutorial.
+    <section class="hero" id="topo">
+      <div class="grid">
+        <div>
+          <div class="kicker">🔓 <b>ATIVAÇÃO</b> • Você entrou no ecossistema</div>
+          <h2>Você não comprou um produto.<br/>Você ativou um sistema vivo.</h2>
+          <p class="sub">
+            Cole o seu <b>link de afiliado</b> abaixo e o sistema vai gerar <b>3 anúncios prontos</b>
+            (manhã, tarde e noite) já com o seu link — e te guiar no passo a passo para criar as regras no <b>AutoReply</b>. https://play.google.com/store/apps/details?id=com.pransuinc.autoreply
           </p>
-
-          <div class="steps">
-            <div class="step" id="s1">
-              <div class="head">
-                <div>
-                  <h3>1) Entrar como afiliado (obrigatório)</h3>
-                  <p class="mini">Clique no botão, entre e confirme sua afiliação.</p>
-                </div>
-                <span class="badge">PASSO 1</span>
-              </div>
-              <div class="row">
-                <a class="btn primary" id="btnAfiliar" href="#" target="_blank" rel="noopener">✅ Entrar como afiliado</a>
-                <button class="btn" id="btnMarcar1" type="button">Já fiz isso</button>
-              </div>
-              <p class="mini">Depois de entrar como afiliado, vá para o PASSO 2.</p>
-            </div>
-
-            <div class="step" id="s2">
-              <div class="head">
-                <div>
-                  <h3>2) Copiar seu link correto (na Kiwify)</h3>
-                  <p class="mini">Dentro do painel do produto (igual sua imagem):</p>
-                </div>
-                <span class="badge">PASSO 2</span>
-              </div>
-              <ul>
-                <li>Abra o produto e clique em <b>Detalhes</b></li>
-                <li>Copie a <b>URL da página de vendas</b> (é o seu link de afiliado)</li>
-                <li>Volte aqui e cole no campo do <b>PASSO 3</b></li>
-              </ul>
-            </div>
-
-            <div class="step" id="s3">
-              <div class="head">
-                <div>
-                  <h3>3) Cole seu link e gere seus textos</h3>
-                  <p class="mini">Cole a URL da página de vendas (aquela do “Detalhes”).</p>
-                </div>
-                <span class="badge">PASSO 3</span>
-              </div>
-
-              <div class="input">
-                <label for="aff">Cole aqui sua URL da página de vendas (afiliado)</label>
-                <input id="aff" placeholder="COLE AQUI A URL DA PÁGINA DE VENDAS (Kiwify)" autocomplete="off" inputmode="url" />
-                <div class="mini">Dica: precisa começar com <b>http</b> ou <b>https</b>.</div>
-              </div>
-
-              <div class="row">
-                <button class="btn gold" id="btnGerar" type="button">✨ GERAR 3 TEXTOS + AUTO REPLY</button>
-                <button class="btn" id="btnCopiarTudo" type="button" disabled>📋 COPIAR TUDO</button>
-              </div>
-
-              <div class="ok" id="okBox"></div>
-              <div class="err" id="errBox"></div>
-            </div>
+          <div class="actions">
+            <button class="btn primary" id="btnScroll">Ativar meu sistema agora ✅</button>
+            <button class="btn ghost" id="btnReset">Apagar dados desta página</button>
           </div>
+        </div>
 
+        <div class="card">
+          <h3>✅ O que você vai sair daqui com tudo pronto</h3>
+          <p>
+            • 3 variações de texto já com seu link (copiar/colar)<br/>
+            • Horários sugeridos (manhã/tarde/noite)<br/>
+            • Passo a passo: regra 1 + duplicação para regra 2 e 3<br/>
+            • Configuração opcional: ignorar grupos que você não quer enviar
+          </p>
           <div class="divider"></div>
+          <p class="mini">
+            <span class="smallcaps">Recomendado</span><br/>
+            Comece com AutoReply (grátis e sem limites). Depois, se quiser, evolua para ferramentas mais avançadas.
+          </p>
+        </div>
+      </div>
+    </section>
 
-          <div class="box">
-            <h3>✅ Resultado final (o que você vai ter)</h3>
-            <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.55">
-              <li>3 textos prontos (com seu link)</li>
-              <li>Mensagem pronta pro Auto Reply</li>
-              <li>Tutorial simples pra configurar <b>Grupos</b> ou <b>Ambas</b></li>
-              <li>Ritmo recomendado: <b>3x por dia</b></li>
+    <div class="panel" id="ativacao">
+      <section class="card">
+        <h3>🔗 Cole seu link de afiliado aqui</h3>
+        <p>
+          Esse link será colocado automaticamente no final das 3 mensagens.
+          Pode ser do seu painel (ex.: consysencia.com com seu parâmetro).
+        </p>
+
+        <div class="field">
+          <label for="affiliateLink">Seu link de afiliado</label>
+          <div class="inputRow">
+            <input id="affiliateLink" type="url" placeholder="Ex.: https://consysencia.com/?ref=SEUUSUARIO" autocomplete="off" />
+            <button class="btn primary" id="btnGenerate">Gerar meus 3 anúncios</button>
+            <button class="btn ghost" id="btnCopyLink">Copiar meu link</button>
+          </div>
+          <div class="hint">
+            Dica: se o seu link estiver correto, você vai ver <b>“Link validado ✅”</b> logo abaixo.
+          </div>
+        </div>
+
+        <div class="status warn" id="statusBox" role="status" aria-live="polite">
+          <div class="icon">ℹ️</div>
+          <div id="statusText">
+            Cole seu link de afiliado e clique em <b>Gerar meus 3 anúncios</b>.
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>📌 Link base (catálogo)</h3>
+        <p class="mini">
+          O robô sempre aponta para a lista completa de ofertas e fecha com o seu link de afiliado.
+        </p>
+        <div class="msg">
+          <div class="msgHeader">
+            <div class="tag">📌 Catálogo base: <b>consysencia.com</b></div>
+            <button class="btn ghost" data-copy="baseCatalog">Copiar</button>
+          </div>
+          <textarea id="baseCatalog" readonly>https://consysencia.com/</textarea>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>🧰 KIT DE ATIVAÇÃO COMPLETO — Nível 1</h3>
+        <p>
+          Isso aqui é a entrega real do nível 1: sistema + operação + escala.
+        </p>
+
+        <div class="status" style="margin-top:0;">
+          <div class="icon">✅</div>
+          <div>
+            <b>Sistema</b>: anúncios automáticos rodando em grupos.<br/>
+            <b>Ecossistema</b>: você cresce com o alcance do ConSySencI.A.<br/>
+            <b>Longo prazo</b>: você começa simples, evolui se quiser.<br/>
+            <b>Cresce com você</b>: o kit vira rotina diária e escalável.
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>⚡ Resultado final</h3>
+        <p class="mini">
+          Você vai ter 3 mensagens (manhã/tarde/noite) prontas para colocar no AutoReply.
+          Depois você pode duplicar e criar mais horários (madrugada, promoções, etc.) sem retrabalho.
+        </p>
+
+        <div class="actions">
+          <button class="btn ghost" id="btnCopyAll">Copiar os 3 anúncios (um por vez)</button>
+          <button class="btn primary" id="btnScrollSteps">Ir para o passo a passo</button>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:14px;">
+      <h3>📣 Seus 3 anúncios prontos (já com seu link)</h3>
+      <p class="mini">
+        Gere as mensagens e copie/cole no AutoReply. As variações mudam abertura, energia e contexto (manhã/tarde/noite) mantendo o mesmo núcleo.
+      </p>
+
+      <div class="gen" id="messagesArea">
+        <!-- mensagens geradas aqui -->
+      </div>
+
+      <div class="status warn" id="genTip" style="display:none;">
+        <div class="icon">💡</div>
+        <div>
+          <b>Melhoria sugerida:</b> use <b>3 palavras-chave diferentes</b> para cada horário (ex.: “bom dia”, “boa tarde”, “boa noite”) para evitar repetição e aumentar disparos naturais ou use a opção responder todas e deixe um intervalo mínimo de tempo exemplo: 8h às 8h30.
+        </div>
+      </div>
+    </section>
+
+    <div class="row2">
+      <section class="card" id="passoapasso">
+        <h3>🧭 Passo a passo (AutoReply) — 1ª regra + duplicações</h3>
+        <p class="mini">
+          Esse guia é pensado para ser <b>rápido</b> e <b>sem erro</b>. Algumas telas podem mudar conforme a versão do app, mas a lógica é a mesma.
+        </p>
+
+        <div class="step">
+          <div class="stepItem">
+            <h4><span class="num">0</span> Antes de começar (limpeza)</h4>
+            <p>
+              Para evitar conflito, <b>apague/desative regras antigas</b> que você não usa mais.
+              Isso é essencial para o robô não enviar mensagens duplicadas.
+            </p>
+            <ul>
+              <li>Abra o AutoReply</li>
+              <li>Vá em <b>Regras / Rules</b></li>
+              <li>Remova ou desative regras antigas</li>
             </ul>
           </div>
+
+          <div class="stepItem">
+            <h4><span class="num">1</span>(Obrigatório) Ignorar grupos que você não quer enviar</h4>
+            <p>
+              Você pode escolher <b>não enviar</b> para alguns grupos (família, trabalho, etc.).  
+              Isso é <b>opcional</b> — faça se quiser mais controle, mas <b>ignorar o grupo Afiliados ConSySencI.A é Obrigatório</b>.
+            </p>
+            <ul>
+              <li>Procure por algo como <b>Exceções / Excluded chats / Ignore list</b></li>
+              <li>Selecione os grupos que você não quer atingir</li>
+              <li>Salve</li>
+            </ul>
+          </div>
+
+          <div class="stepItem">
+            <h4><span class="num">2</span> Criar a Regra 1 (Manhã)</h4>
+            <p>
+              Crie sua primeira regra usando a mensagem <b>MANHÃ</b> (copie aqui na página).
+              Defina um horário fixo (sugestão: <b>08:30</b>).
+            </p>
+            <ul>
+              <li>Crie uma nova regra</li>
+              <li>Escolha o WhatsApp (pessoal ou business, conforme você usa)</li>
+              <li>Defina horários início e fim (ex.: 08:30 às 09:00)</li>
+              <li>Cole o texto <b>MANHÃ</b></li>
+              <li>Salve</li>
+            </ul>
+          </div>
+
+          <div class="stepItem">
+            <h4><span class="num">3</span> Duplicar para Regra 2 (Tarde) sem refazer tudo</h4>
+            <p>
+              Agora vem o “hack”: em vez de criar outra regra do zero, você abre a regra da manhã,
+              muda o horário e o texto, e <b>salva como uma nova regra</b>.
+            </p>
+            <ul>
+              <li>Abra a Regra 1 novamente</li>
+              <li>Edite o horário (sugestão: <b>14:30 às 15:00</b>)</li>
+              <li>Troque o texto para <b>TARDE</b></li>
+              <li>Role até o fim e toque em <b>Salvar</b> (ou “Salvar como” se aparecer)</li>
+              <li>Confira se a nova regra foi criada</li>
+            </ul>
+          </div>
+
+          <div class="stepItem">
+            <h4><span class="num">4</span> Repetir para Regra 3 (Noite)</h4>
+            <p>
+              Repita o mesmo processo: entre na regra recém-criada (Tarde), edite o horário e o texto,
+              e salve novamente.
+            </p>
+            <ul>
+              <li>Abra a Regra 2</li>
+              <li>Edite o horário (sugestão: <b>20:30 às 21:00</b>)</li>
+              <li>Troque o texto para <b>NOITE</b></li>
+              <li>Salve</li>
+            </ul>
+          </div>
+
+          <div class="stepItem">
+            <h4><span class="num">5</span> Pronto: 3 anúncios rodando (manhã, tarde e noite)</h4>
+            <p>
+              Agora você já tem o Nível 1 <b>operando sozinho</b>.  
+              Se quiser escalar depois: crie “Madrugada”, “Promo Relâmpago” e “Novidades” duplicando o mesmo padrão.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- RIGHT -->
-      <div class="grid2">
-        <div class="card">
-          <div class="pad">
-            <h2>📌 Seus textos prontos (gerados aqui)</h2>
-            <p class="mini">Cole seu link no PASSO 3 e clique em “GERAR”.</p>
+      <section class="card">
+        <h3>🧠 Melhorias que aumentam resultado (sem complicar)</h3>
+        <p class="mini">Se quiser ir além do básico, aqui estão upgrades simples e muito eficazes.</p>
 
-            <div class="box">
-              <h3>Mensagem para Auto Reply (copiar/colar)</h3>
-              <div class="code" id="replyBox">Aguardando seu link…</div>
-              <div class="row">
-                <button class="btn" id="cpyReply" type="button" disabled>Copiar mensagem</button>
-              </div>
-            </div>
+        <div class="step">
+          <div class="stepItem">
+            <h4><span class="num">A</span> Use palavras-chave por horário</h4>
+            <p>
+              Ex.: Manhã (<b>bom dia</b>), Tarde (<b>boa tarde</b>), Noite (<b>boa noite</b>).  
+              Isso deixa o robô “natural” e aumenta disparos por contexto.
+            </p>
+          </div>
 
-            <div class="box">
-              <h3>3 textos para postar (com seu link)</h3>
-              <div class="code" id="postsBox">Aguardando seu link…</div>
-              <div class="row">
-                <button class="btn" id="cpyPosts" type="button" disabled>Copiar 3 textos</button>
-              </div>
-            </div>
+          <div class="stepItem">
+            <h4><span class="num">B</span> Rodízio de mensagens (anti-repetição)</h4>
+            <p>
+              Depois que isso estiver rodando, você pode criar uma 4ª mensagem “variante extra” e alternar semanalmente.
+              (Mesmo link, abertura diferente).
+            </p>
+          </div>
+
+          <div class="stepItem">
+            <h4><span class="num">C</span> Proteger seu link</h4>
+            <p>
+              Evite colar o link em vários lugares fora do sistema.  
+              Use sempre as mensagens prontas para manter padrão e rastreio.
+            </p>
+          </div>
+
+          <div class="stepItem">
+            <h4><span class="num">D</span> Evolução natural para Whatauto (opcional)</h4>
+            <p>
+              Quando você quiser follow-up inteligente (ex.: responder PV, segmentar), você adiciona o Whatauto como upgrade, ele tem um custo mensal de R$10 Reais, mas compensa muito, ele responde whatsapp, Instagram, Facebook, telegram, etc. https://play.google.com/store/apps/details?id=com.guibais.whatsauto ele tem teste grátis limitado caso queira.
+              O Nível 1 continua com o AutoReply como base gratuita.
+            </p>
           </div>
         </div>
 
-        <div class="card" id="autoReplyCard">
-          <div class="pad">
-            <h2>🤖 Auto Reply (liberado após gerar)</h2>
-            <p class="mini">Quando você gerar os textos, esta área fica “ativa” e te guia.</p>
-
-            <div class="box">
-              <h3>Link oficial do app</h3>
-              <p class="mini" style="margin:0 0 10px">
-                Baixe no Google Play:
-                <b id="arLinkText"></b>
-              </p>
-              <div class="row">
-                <a class="btn primary" id="btnAutoReply" href="#" target="_blank" rel="noopener">📥 Baixar Auto Reply</a>
-                <button class="btn" id="cpyArLink" type="button">Copiar link</button>
-              </div>
-              <p class="mini" style="margin-top:10px">✅ Use sempre o app oficial (como na sua imagem).</p>
-            </div>
-
-            <div class="box">
-              <h3>Configuração mais fácil (igual seu print)</h3>
-              <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.55">
-                <li>Abra o Auto Reply</li>
-                <li>Toque no <b>+</b> (botão roxo)</li>
-                <li>Em <b>Responder por WA App</b>: escolha <b>Oficial de WA</b></li>
-                <li>Em <b>Padrão de mensagem recebida</b>:
-                  <ul>
-                    <li>Mais simples: coloque <b>*</b> e selecione <b>Todas</b></li>
-                    <li>Mais seguro: selecione <b>Conter</b> e coloque: <b>oi</b>, <b>info</b> ou <b>link</b></li>
-                  </ul>
-                </li>
-                <li>Em <b>Responder a</b>: escolha <b>Grupos</b> ou <b>Ambas</b></li>
-                <li>Defina a resposta usando a mensagem pronta (gerada aqui)</li>
-                <li>Salve (✅) e ative o Auto Reply</li>
-              </ul>
-            </div>
-
-            <div class="box">
-              <h3>3x por dia (ritmo recomendado)</h3>
-              <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.55">
-                <li><b>09:00</b> — manhã</li>
-                <li><b>14:00</b> — tarde</li>
-                <li><b>20:00</b> — noite</li>
-              </ul>
-              <p class="mini" style="margin-top:8px">
-                Use os <b>3 textos</b> gerados para postar/rodar no padrão que preferir.
-              </p>
-            </div>
-
+        <div class="status" style="margin-top:14px;">
+          <div class="icon">⚡</div>
+          <div>
+            <b>Regra de ouro:</b> comece simples, rode por 3 dias, depois só ajuste horário e texto.
+            O sistema cresce com consistência.
           </div>
         </div>
-
-      </div>
+      </section>
     </div>
 
-    <div class="foot">© ConSySencI.A — Ativação Nível 1</div>
-  </div>
-
-  <!-- Celebration modal -->
-  <div class="modal" id="modal">
-    <div class="panel">
-      <div class="content">
-        <h3>🎉 Ativação concluída!</h3>
-        <p>
-          Seus textos foram gerados com seu link e o Auto Reply foi liberado.
-          Agora é só <b>copiar/colar</b> e colocar a máquina pra rodar.
-        </p>
-        <div class="row">
-          <button class="btn primary" id="goAutoReply" type="button">Ir para Auto Reply</button>
-          <button class="btn" id="closeModal" type="button">Fechar</button>
-        </div>
-      </div>
+    <div class="footer">
+      ConSySencI.A • Nível 1 — Ativação do Sistema • <b>Operação simples, escala real</b>
     </div>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <script>
+    // ====== Helpers ======
+    const $ = (id) => document.getElementById(id);
+    const scrollToEl = (el) => el?.scrollIntoView({behavior:"smooth", block:"start"});
 
-<script>
-  // ========= LINKS FIXOS (SEU SISTEMA) =========
-  const KIWI_AFFILIATE_JOIN = "https://dashboard.kiwify.com/join/affiliate/SowuJ1bL";
-  const AUTO_REPLY_PLAYSTORE = "https://play.google.com/store/apps/details?id=com.pransuinc.autoreply";
-
-  // ========= ELEMENTOS =========
-  const btnAfiliar = document.getElementById("btnAfiliar");
-  const btnAutoReply = document.getElementById("btnAutoReply");
-  const arLinkText = document.getElementById("arLinkText");
-  const cpyArLink = document.getElementById("cpyArLink");
-
-  const aff = document.getElementById("aff");
-  const btnGerar = document.getElementById("btnGerar");
-  const btnCopiarTudo = document.getElementById("btnCopiarTudo");
-  const cpyReply = document.getElementById("cpyReply");
-  const cpyPosts = document.getElementById("cpyPosts");
-
-  const replyBox = document.getElementById("replyBox");
-  const postsBox = document.getElementById("postsBox");
-
-  const okBox = document.getElementById("okBox");
-  const errBox = document.getElementById("errBox");
-
-  const toastEl = document.getElementById("toast");
-  const modal = document.getElementById("modal");
-  const closeModal = document.getElementById("closeModal");
-  const goAutoReply = document.getElementById("goAutoReply");
-  const btnMarcar1 = document.getElementById("btnMarcar1");
-
-  btnAfiliar.href = KIWI_AFFILIATE_JOIN;
-  btnAutoReply.href = AUTO_REPLY_PLAYSTORE;
-  arLinkText.textContent = AUTO_REPLY_PLAYSTORE;
-
-  // ========= UI HELPERS =========
-  function showOk(msg){
-    okBox.style.display = "block";
-    errBox.style.display = "none";
-    okBox.innerHTML = msg;
-  }
-  function showErr(msg){
-    errBox.style.display = "block";
-    okBox.style.display = "none";
-    errBox.innerHTML = msg;
-  }
-  function toast(msg){
-    toastEl.textContent = msg;
-    toastEl.style.display = "block";
-    clearTimeout(window.__t);
-    window.__t = setTimeout(()=> toastEl.style.display = "none", 2100);
-  }
-
-  function isValidUrl(u){
-    try{
-      const url = new URL(u);
-      return url.protocol === "http:" || url.protocol === "https:";
-    }catch(e){ return false; }
-  }
-
-  async function copyText(text){
-    try{
-      await navigator.clipboard.writeText(text);
-      return true;
-    }catch(e){
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      const ok = document.execCommand("copy");
-      ta.remove();
-      return ok;
+    function isLikelyUrl(u){
+      try{
+        const url = new URL(u);
+        return (url.protocol === "http:" || url.protocol === "https:") && url.hostname.length > 1;
+      }catch(e){ return false; }
     }
-  }
 
-  // ========= TEMPLATES =========
-  function buildReply(link){
-    return `Oi 👋\n\nEu tenho um kit simples pra começar hoje: landing pronta + passo a passo (tudo copiar/colar).\n\n✅ Acesse aqui: ${link}\n\nSe quiser, eu te explico em 30 segundos.`;
-  }
+    function setStatus(type, html){
+      const box = $("statusBox");
+      const text = $("statusText");
+      box.classList.remove("warn","danger");
+      if(type) box.classList.add(type);
+      text.innerHTML = html;
+    }
 
-  function buildPosts(link){
-    return [
-`TEXTO 1:\n🧩 Kit copiar/colar pra começar hoje (R$10)\nLanding pronta + tutorial + automação simples\nLink: ${link}`,
-`TEXTO 2:\nQuem quer começar no online sem aparecer?\nÉ só copiar/colar e divulgar com constância.\nLink: ${link}`,
-`TEXTO 3:\nNão é curso gigante. É execução simples.\nPágina pronta + passo a passo (R$10).\nLink: ${link}`
-    ].join("\n\n---------------------------\n\n");
-  }
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try{
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          return true;
+        }catch(err){
+          document.body.removeChild(ta);
+          return false;
+        }
+      }
+    }
 
-  // ========= CONFETTI (celebração séria e bonita) =========
-  const canvas = document.getElementById("confetti");
-  const ctx = canvas.getContext("2d");
-  let confettiPieces = [];
-  let confettiOn = false;
+    function safeLinkDisplay(link){
+      // keep as is; could add minimal trimming
+      return link.trim();
+    }
 
-  function resizeCanvas(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
+    // ====== Message generator ======
+    function buildMessages(affiliateLink){
+      const link = safeLinkDisplay(affiliateLink);
 
-  function spawnConfetti(){
-    confettiPieces = [];
-    const colors = ["#00E5FF", "#7CFF6B", "#FFCC00", "#EAF0FF"];
-    for(let i=0;i<160;i++){
-      confettiPieces.push({
-        x: Math.random()*canvas.width,
-        y: -20 - Math.random()*canvas.height*0.2,
-        r: 4 + Math.random()*5,
-        vx: -1.5 + Math.random()*3,
-        vy: 2 + Math.random()*4.2,
-        rot: Math.random()*Math.PI,
-        vr: -0.12 + Math.random()*0.24,
-        c: colors[Math.floor(Math.random()*colors.length)],
-        a: 0.85
+      const catalog = "https://consysencia.com/";
+
+      // Core block (must keep user's original nucleus)
+      // We'll inject affiliate link at the end (as requested).
+      const core = (titleLine, extraLine) => `
+${titleLine}
+
+Confira abaixo algumas oportunidades disponíveis agora:
+
+✔ Produtos digitais
+✔ Ferramentas automáticas
+✔ Soluções que vendem todos os dias
+
+${extraLine}
+
+🚀 Acesse por aqui:
+👉 ${link}
+`.trim();
+
+      const morning = core(
+        "☀️ BOM DIA — OFERTAS ATIVAS | SISTEMA ConSySencI.A",
+        "💡 Dica rápida: escolha 1 oferta e ative agora. Consistência = resultado."
+      );
+
+      const afternoon = core(
+        "🌤️ BOA TARDE — OPORTUNIDADES ATIVAS | SISTEMA ConSySencI.A",
+        "⚡ Se você perdeu pela manhã, ainda dá tempo: pegue 1 oportunidade e avance hoje."
+      );
+
+      const night = core(
+        "🌙 BOA NOITE — ÚLTIMAS OPORTUNIDADES DO DIA | SISTEMA ConSySencI.A",
+        "🧠 Movimento simples: abra a lista, escolha 1, e rode o sistema. Amanhã você repete e escala."
+      );
+
+      return [
+        { key:"manha", label:"MANHÃ (sugestão: 08:30)", note:"Use palavras-chave: bom dia", text: morning },
+        { key:"tarde", label:"TARDE (sugestão: 14:30)", note:"Use palavras-chave: boa tarde", text: afternoon },
+        { key:"noite", label:"NOITE (sugestão: 20:30)", note:"Use palavras-chave: boa noite", text: night },
+      ];
+    }
+
+    function renderMessages(msgs){
+      const area = $("messagesArea");
+      area.innerHTML = "";
+
+      msgs.forEach((m) => {
+        const wrap = document.createElement("div");
+        wrap.className = "msg";
+
+        wrap.innerHTML = `
+          <div class="msgHeader">
+            <div>
+              <div class="tag">📣 <b>${m.label}</b></div>
+              <div class="mini" style="margin-top:6px;">${m.note}</div>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn ghost" data-copy="${m.key}">Copiar</button>
+            </div>
+          </div>
+          <textarea id="${m.key}" readonly></textarea>
+        `;
+
+        area.appendChild(wrap);
+        $(m.key).value = m.text;
       });
-    }
-  }
 
-  function drawConfetti(){
-    if(!confettiOn) return;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    for(const p of confettiPieces){
-      ctx.save();
-      ctx.globalAlpha = p.a;
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rot);
-      ctx.fillStyle = p.c;
-      ctx.fillRect(-p.r, -p.r/2, p.r*2.2, p.r);
-      ctx.restore();
-
-      p.x += p.vx;
-      p.y += p.vy;
-      p.rot += p.vr;
-      p.vy += 0.03;
-      if(p.y > canvas.height + 40) p.a = 0;
+      $("genTip").style.display = "flex";
     }
 
-    const alive = confettiPieces.some(p => p.a > 0.05);
-    if(alive) requestAnimationFrame(drawConfetti);
-    else {
-      confettiOn = false;
-      canvas.style.display = "none";
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-    }
-  }
-
-  function celebrate(){
-    resizeCanvas();
-    spawnConfetti();
-    confettiOn = true;
-    canvas.style.display = "block";
-    requestAnimationFrame(drawConfetti);
-  }
-
-  // ========= AÇÕES =========
-  btnMarcar1.addEventListener("click", ()=>{
-    toast("✅ Passo 1 marcado. Agora copie o link em “Detalhes” (PASSO 2).");
-    document.getElementById("s2").scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-  btnGerar.addEventListener("click", ()=>{
-    const link = (aff.value || "").trim();
-
-    if(!link){
-      showErr("Cole a <b>URL da página de vendas</b> (no painel → Detalhes).");
-      return;
-    }
-    if(!isValidUrl(link)){
-      showErr("Esse link parece inválido. Ele precisa começar com <b>http</b> ou <b>https</b>.");
-      return;
+    // ====== Load saved link ======
+    const saved = localStorage.getItem("consysencia_affiliate_link");
+    if(saved){
+      $("affiliateLink").value = saved;
+      if(isLikelyUrl(saved)){
+        setStatus("", `Link encontrado no seu dispositivo: <b>validado ✅</b><br/>Clique em <b>Gerar meus 3 anúncios</b> para atualizar as mensagens.`);
+      }
     }
 
-    const reply = buildReply(link);
-    const posts = buildPosts(link);
+    // ====== Events ======
+    $("btnScroll").addEventListener("click", () => scrollToEl($("ativacao")));
+    $("btnScrollSteps").addEventListener("click", () => scrollToEl($("passoapasso")));
 
-    replyBox.textContent = reply;
-    postsBox.textContent = posts;
+    $("btnReset").addEventListener("click", () => {
+      localStorage.removeItem("consysencia_affiliate_link");
+      $("affiliateLink").value = "";
+      $("messagesArea").innerHTML = "";
+      $("genTip").style.display = "none";
+      setStatus("warn", `Dados apagados. Cole seu link de afiliado e clique em <b>Gerar meus 3 anúncios</b>.`);
+      scrollToEl($("ativacao"));
+    });
 
-    btnCopiarTudo.disabled = false;
-    cpyReply.disabled = false;
-    cpyPosts.disabled = false;
+    $("affiliateLink").addEventListener("input", () => {
+      const v = $("affiliateLink").value.trim();
+      if(!v){
+        setStatus("warn", `Cole seu link de afiliado e clique em <b>Gerar meus 3 anúncios</b>.`);
+        return;
+      }
+      if(!isLikelyUrl(v)){
+        setStatus("danger", `Seu link parece inválido. Use um link completo começando com <b>https://</b>`);
+        return;
+      }
+      setStatus("", `Link validado ✅<br/>Agora clique em <b>Gerar meus 3 anúncios</b>.`);
+    });
 
-    showOk("✅ Textos gerados com seu link. Agora copie e configure o Auto Reply (logo abaixo).");
-    toast("🎉 Gerado! Seus textos estão prontos.");
-    celebrate();
+    $("btnGenerate").addEventListener("click", () => {
+      const link = $("affiliateLink").value.trim();
+      if(!link){
+        setStatus("danger", `Cole seu link de afiliado antes de gerar.`);
+        return;
+      }
+      if(!isLikelyUrl(link)){
+        setStatus("danger", `Seu link parece inválido. Use um link completo começando com <b>https://</b>`);
+        return;
+      }
 
-    modal.style.display = "flex";
-  });
+      localStorage.setItem("consysencia_affiliate_link", link);
 
-  cpyReply.addEventListener("click", async ()=>{
-    const ok = await copyText(replyBox.textContent);
-    ok ? toast("✅ Mensagem do Auto Reply copiada!") : toast("❌ Não consegui copiar. Copie manualmente.");
-  });
+      const msgs = buildMessages(link);
+      renderMessages(msgs);
 
-  cpyPosts.addEventListener("click", async ()=>{
-    const ok = await copyText(postsBox.textContent);
-    ok ? toast("✅ 3 textos copiados!") : toast("❌ Não consegui copiar. Copie manualmente.");
-  });
+      setStatus("", `Mensagens geradas ✅<br/>Agora copie MANHÃ, crie a Regra 1 no AutoReply, depois duplique para TARDE e NOITE.`);
+      scrollToEl($("messagesArea"));
+    });
 
-  btnCopiarTudo.addEventListener("click", async ()=>{
-    const all = `MENSAGEM AUTO REPLY:\n\n${replyBox.textContent}\n\n===========================\n\n3 TEXTOS PARA POSTAR:\n\n${postsBox.textContent}\n`;
-    const ok = await copyText(all);
-    ok ? toast("✅ Tudo copiado (Auto Reply + 3 textos)!") : toast("❌ Não consegui copiar. Copie manualmente.");
-  });
+    $("btnCopyLink").addEventListener("click", async () => {
+      const link = $("affiliateLink").value.trim();
+      if(!link){
+        setStatus("danger", `Não há link para copiar.`);
+        return;
+      }
+      const ok = await copyText(link);
+      setStatus(ok ? "" : "warn", ok
+        ? `Link copiado ✅`
+        : `Não consegui copiar automaticamente. Selecione o link e copie manualmente.`);
+    });
 
-  cpyArLink.addEventListener("click", async ()=>{
-    const ok = await copyText(AUTO_REPLY_PLAYSTORE);
-    ok ? toast("✅ Link do Auto Reply copiado!") : toast("❌ Não consegui copiar.");
-  });
+    // Copy buttons (delegation)
+    document.addEventListener("click", async (e) => {
+      const btn = e.target.closest("button[data-copy]");
+      if(!btn) return;
+      const id = btn.getAttribute("data-copy");
+      const el = $(id);
+      if(!el) return;
 
-  closeModal.addEventListener("click", ()=>{
-    modal.style.display = "none";
-  });
+      const ok = await copyText(el.value);
+      if(ok){
+        btn.textContent = "Copiado ✅";
+        setTimeout(() => btn.textContent = "Copiar", 1400);
+      }else{
+        btn.textContent = "Falhou 😕";
+        setTimeout(() => btn.textContent = "Copiar", 1400);
+      }
+    });
 
-  goAutoReply.addEventListener("click", ()=>{
-    modal.style.display = "none";
-    document.getElementById("autoReplyCard").scrollIntoView({behavior:"smooth", block:"start"});
-    toast("👇 Aqui está o passo a passo do Auto Reply.");
-  });
-
-  modal.addEventListener("click", (e)=>{
-    if(e.target === modal) modal.style.display = "none";
-  });
-</script>
+    // "Copy all (one by one)" helper
+    $("btnCopyAll").addEventListener("click", async () => {
+      // copies first message found; user asked "um por vez"
+      const ids = ["manha","tarde","noite"];
+      for(const id of ids){
+        const el = $(id);
+        if(el && el.value){
+          const ok = await copyText(el.value);
+          setStatus(ok ? "" : "warn",
+            ok
+              ? `Copiei o anúncio <b>${id.toUpperCase()}</b> ✅<br/>Cole no AutoReply e volte aqui para copiar o próximo.`
+              : `Não consegui copiar automaticamente o anúncio <b>${id.toUpperCase()}</b>. Selecione e copie manualmente.`
+          );
+          return;
+        }
+      }
+      setStatus("warn", `Gere os anúncios primeiro para conseguir copiar.`);
+    });
+  </script>
 </body>
 </html>
